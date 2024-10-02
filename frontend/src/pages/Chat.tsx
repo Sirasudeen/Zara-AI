@@ -84,7 +84,7 @@ const Chat = () => {
             display: "flex",
             width: "100%",
             height: "60vh",
-            bgcolor: "rgb(17,29,39)",
+            bgcolor: "#7E60BF",
             borderRadius: 5,
             flexDirection: "column",
             mx: 3,
@@ -114,13 +114,13 @@ const Chat = () => {
             sx={{
               width: "200px",
               my: "auto",
-              color: "white",
+              color: "#433878",
               fontWeight: "700",
               borderRadius: 3,
               mx: "auto",
-              bgcolor: red[300],
+              bgcolor: "#FFE1FF",
               ":hover": {
-                bgcolor: red.A400,
+                bgcolor: "#E4B1F0",
               },
             }}
           >
@@ -145,7 +145,7 @@ const Chat = () => {
             fontWeight: "600",
           }}
         >
-          Model - GPT 3.5 Turbo
+          Zara - Ai
         </Typography>
         <Box
           sx={{
@@ -169,25 +169,34 @@ const Chat = () => {
         <div
           style={{
             width: "100%",
-            borderRadius: 8,
-            backgroundColor: "rgb(17,27,39)",
+            borderRadius: "20px",
+            backgroundColor: "#E78F81",
             display: "flex",
             margin: "auto",
           }}
         >
           {" "}
           <input
+            onKeyDown={(event) => {
+              if(event.key === "Enter")
+              {
+                handleSubmit();
+              }
+            }}
             ref={inputRef}
             type="text"
             style={{
               width: "100%",
-              backgroundColor: "transparent",
-              padding: "30px",
-              border: "none",
+              backgroundColor: "#FFF5CD",
+              padding: "20px",
+              border : "none",
+              borderRadius: "20px",
               outline: "none",
-              color: "white",
+              color: "#0B192C",
               fontSize: "20px",
+              
             }}
+
           />
           <IconButton onClick={handleSubmit} sx={{ color: "white", mx: 1 }}>
             <IoMdSend />

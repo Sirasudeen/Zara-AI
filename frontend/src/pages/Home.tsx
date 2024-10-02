@@ -1,65 +1,51 @@
-import { Box, useMediaQuery, useTheme } from "@mui/material";
-import React from "react";
+import { Box, useMediaQuery, useTheme,Typography, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import TypingAnim from "../components/typer/TypingAnim";
-import Footer from "../components/footer/Footer";
 
 const Home = () => {
-  const theme = useTheme();
-  const isBelowMd = useMediaQuery(theme.breakpoints.down("md"));
+const navigate = useNavigate();
+
   return (
-    <Box width={"100%"} height={"100%"}>
+    <Box width={"100%"} height={"100%"} sx={{display:'flex',flexDirection:'column',alignItems:'center',textAlign:'center'}}>
       <Box
         sx={{
-          display: "flex",
-          width: "100%",
-          flexDirection: "column",
-          alignItems: "center",
-          mx: "auto",
-          mt: 3,
-        }}
+          p:"4rem",
+          display:'flex',flexDirection:'column',alignItems:'center',textAlign:'center',
+          gap: '1rem',
+          mt:'3rem'
+        }} 
       >
-        <Box>
-          <TypingAnim />
-        </Box>
-        <Box
+        <TypingAnim />
+          <Box sx={{width:"50rem",textAlign: 'center'}}>
+          <Typography sx ={{ fontSize:'2rem', color:"#1E3E62"}}>
+        Guiding you through academics and helping you stay stress-free, every step of the way.
+        </Typography>
+        
+          </Box>
+          <Button
+          onClick={() => navigate('/signup')}
           sx={{
-            width: "100%",
-            display: "flex",
-            flexDirection: { md: "row", xs: "column", sm: "column" },
-            gap: 5,
-            my: 10,
+            
+            backgroundColor: '#FFAD60', // Custom purple color
+            color: '#fff',
+            padding: '10px 20px',
+            fontSize: '1.6rem',
+            mt:'1rem',
+            borderRadius: '10px',
+            textTransform: 'none', // Disabling uppercase text transformation
+            '&:hover': {
+              backgroundColor: '#FFD09B', 
+              transform: "scale(1.1)",
+              // Darker purple on hover
+            },
+            '&:active': {
+              backgroundColor: '#03dac6', // Teal on active click
+            },
           }}
         >
-          <img
-            src="robot.png"
-            alt="robot"
-            style={{ width: "200px", margin: "auto" }}
-          />
-          <img
-            className="image-inverted rotate"
-            src="openai.png"
-            alt="openai"
-            style={{ width: "200px", margin: "auto" }}
-          />
-        </Box>
-        <Box sx={{ display: "flex", mx: "auto" }}>
-          <img
-            src="chat.png"
-            alt="chatbot"
-            style={{
-              display: "flex",
-              margin: "auto",
-              width: isBelowMd ? "80%" : "60%",
-              borderRadius: 20,
-              boxShadow: "-5px -5px 105px #64f3d5",
-              marginTop: 20,
-              marginBottom: 20,
-              padding: 10,
-            }}
-          />
-        </Box>
+          Get started
+        </Button>
       </Box>
-      <Footer />
     </Box>
   );
 };

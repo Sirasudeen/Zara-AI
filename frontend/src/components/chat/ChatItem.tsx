@@ -71,18 +71,19 @@ const ChatItem = ({
       sx={{
         display: "flex",
         p: 2,
-        bgcolor: "#004d56",
+        bgcolor: "#E7CCCC",
         gap: 2,
-        borderRadius: 2,
+        borderRadius: "20px",
+        marginBottom: "20px"
       }}
     >
       <Avatar sx={{ ml: "0", bgcolor: "black", color: "white" }}>
         {auth?.user?.name[0]}
         {auth?.user?.name.split(" ")[1][0]}
       </Avatar>
-      <Box>
+      <Box >
         {!messageBlocks && (
-          <Typography sx={{ fontSize: "20px" }}>{content}</Typography>
+          <Typography sx={{ fontSize: "1.5rem", fontFamily:'cursive',color:"#603F26" }}>{content}</Typography>
         )}
         {messageBlocks &&
           messageBlocks.length &&

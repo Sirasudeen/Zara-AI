@@ -11,19 +11,19 @@ const Header = () => {
     <AppBar
       sx={{ bgcolor: "transparent", position: "static", boxShadow: "none" }}
     >
-      <Toolbar sx={{ display: "flex" }}>
+      <Toolbar sx={{ display: "flex", fontSize:'1.4rem' }}>
         <Logo />
         <div>
           {auth?.isLoggedIn ? (
             <>
               <NavigationLink
-                bg="#00fffc"
+                bg="#FFF5CD"
                 to="/chat"
                 text="Go To Chat"
                 textColor="black"
               />
               <NavigationLink
-                bg="#51538f"
+                bg="#A66E38"
                 textColor="white"
                 to="/"
                 text="logout"
@@ -33,13 +33,13 @@ const Header = () => {
           ) : (
             <>
               <NavigationLink
-                bg="#00fffc"
+                bg="#FFF5CD"
                 to="/login"
                 text="Login"
                 textColor="black"
               />
               <NavigationLink
-                bg="#51538f"
+                bg="#A66E38"
                 textColor="white"
                 to="/signup"
                 text="Signup"

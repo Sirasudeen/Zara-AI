@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Typography from "@mui/material/Typography";
+import { Box } from "@mui/material";
 const Logo = () => {
   return (
     <div
@@ -8,15 +9,15 @@ const Logo = () => {
         marginRight: "auto",
         alignItems: "center",
         gap: "15px",
+        marginTop:"2rem"
       }}
     >
       <Link to={"/"}>
         <img
-          src="openai.png"
+          src="openai.svg"
           alt="openai"
-          width={"30px"}
-          height={"30px"}
-          className="image-inverted"
+          width={"90px"}
+          height={"90px"}
         />
       </Link>{" "}
       <Typography
@@ -24,10 +25,13 @@ const Logo = () => {
           display: { md: "block", sm: "none", xs: "none" },
           mr: "auto",
           fontWeight: "800",
-          textShadow: "2px 2px 20px #000",
+          fontFamily: "sans-serif",
+          color: "#E78F81",
+          fontSize: "2rem",
+          textShadow: "2px"
         }}
       >
-        <span style={{ fontSize: "20px" }}>MERN</span>-GPT
+        <span style={{ fontSize: "4rem", fontFamily:'Satisfy' }}>Zara</span>  -AI
       </Typography>
     </div>
   );

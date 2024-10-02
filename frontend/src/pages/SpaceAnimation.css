@@ -1,0 +1,98 @@
+  body {
+    margin: 0;
+    overflow: hidden; /* Prevent scrolling */
+  }
+
+  .space-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: black; /* Space background */
+    overflow: hidden; /* Prevent overflowing */
+  }
+
+  .planet {
+    position: absolute;
+    opacity: 0.8; /* Slightly transparent */
+    height: auto; /* Keep aspect ratio */
+  }
+
+  .comet {
+    position: absolute;
+    opacity: 0.8; /* Slightly transparent */
+    height: auto; /* Keep aspect ratio */
+  }
+
+  .earth {
+    animation: floatEarth 50s infinite alternate ease-in-out;
+  }
+
+  .saturn {
+    animation: floatSaturn 60s infinite alternate ease-in-out;
+  }
+
+  .comet {
+    animation: floatComet 20s linear infinite;
+    animation-delay: 5s;
+  }
+
+  /* Earth floating animation */
+  @keyframes floatEarth {
+    0% {
+      transform: translate(100vw, -30rem); /* Start from the right side, above the viewport */
+    }
+    20% {
+      transform: translate(-30rem, 10rem); /* Float slightly to the left and down */
+    }
+    40% {
+      transform: translate(-50rem, 20rem); /* Continue floating down */
+    }
+    60% {
+      transform: translate(-20rem, 40rem); /* Float a bit to the right and down */
+    }
+    80% {
+      transform: translate(10rem, 60rem); /* Float further down and slightly to the right */
+    }
+    100% {
+      transform: translate(100vw, 100rem); /* Move off the screen to the right */
+    }
+  }
+  
+
+  /* Saturn floating animation */
+  @keyframes floatSaturn {
+    0% {
+      transform: translate(0, 0);
+    }
+    20% {
+      transform: translate(-60rem, 20rem); /* Adjust to float in random direction */
+    }
+    40% {
+      transform: translate(40rem, 30rem); /* Adjust to float in random direction */
+    }
+    60% {
+      transform: translate(-30rem, -25rem); /* Adjust to float in random direction */
+    }
+    80% {
+      transform: translate(50rem, 10rem); /* Adjust to float in random direction */
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+
+  /* Comet floating animation */
+  @keyframes floatComet {
+    0% {
+      transform: translate(100vw,-50rem); /* Start just above the viewport */
+    }
+    50% {
+      transform: translate(0,0); /* Move to the bottom of the viewport */
+    }
+    100% {
+      transform: translate(-100vh,30rem); /* Instantly reposition to above the viewport */
+    }
+  }
+  
