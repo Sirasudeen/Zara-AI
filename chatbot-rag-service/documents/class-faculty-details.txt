@@ -1,0 +1,86 @@
+Section A (CSE/SCIMS - CSE - VII Semester)
+
+    Blockchain Technology (CSD 4101)
+        Faculty: Dr. V. Muthupriya (Assoc. Prof. / CSE)
+
+    Internship (CSD 4102)
+        Faculty: Mrs. Kamarunnisha (Asst. Prof. / CSE)
+
+    Graph Theory and Applications (CSDX 121)
+        Faculty: Mrs. Kamarunnisha (Asst. Prof. / CSE)
+
+    Full Stack Mobile Application Development II (Back end) (CSDX 126)
+        Faculty: Mrs. S. Hemalatha (Asst. Prof. / CSE)
+
+    Web Hacking and Security (CSDX 127)
+        Faculty: Mrs. M.M. Noor Fasla (Asst. Prof. / CSE)
+
+    Social Media Security (CSDX 128)
+        Faculty: Dr. L. Arunraj (Assoc. Prof. / CSE)
+
+    Multimedia Security (CSDX 129)
+        Faculty: Dr. L. Arunraj (Assoc. Prof. / CSE)
+
+    API Design (CSDX 131)
+        Faculty: Mrs. A. Nazreen (Asst. Prof. / CSE)
+
+    AI Chat Bot Application (CSDX 142)
+        Faculty: Dr. S. Subhashini (Asst. Professor Sr. Gr. / CSE)
+
+Section B (CSE/SCIMS - CSE - VII Semester)
+
+    Blockchain Technology (CSD 4101)
+        Faculty: Dr. V. Muthupriya (Assoc. Prof. / CSE)
+
+    Internship (CSD 4102)
+        Faculty: Mrs. C. Vijayalakshmi (Asst. Prof. / CSE)
+
+    Graph Theory and Applications (CSDX 121)
+        Faculty: Mrs. A. Sulthana Rashya Begam (Asst. Prof. / CSE)
+
+    Full Stack Mobile Application Development II (Back end) (CSDX 126)
+        Faculty: Mrs. S. Hemalatha (Asst. Prof. / CSE)
+
+    Web Hacking and Security (CSDX 127)
+        Faculty: Mrs. M.M. Noor Fasla (Asst. Prof. / CSE)
+
+    Social Media Security (CSDX 128)
+        Faculty: Dr. S. Syed Abdul Syed (Assoc. Prof. / CSE)
+
+    Multimedia Security (CSDX 129)
+        Faculty: Dr. L. Arunraj (Assoc. Prof. / CSE)
+
+    API Design (CSDX 131)
+        Faculty: Mrs. A. Nazreen (Asst. Prof. / CSE)
+
+    AI Chat Bot Application (CSDX 142)
+        Faculty: Mrs. A. Saraswathi (Asst. Prof. / CSE)
+
+Section C (CSE/SCIMS - CSE - VII Semester)
+
+    Blockchain Technology (CSD 4101)
+        Faculty: Mrs. S. Hemalatha (Asst. Prof. / CSE)
+
+    Internship (CSD 4102)
+        Faculty: Mr. S.R. Senthil Kumar (Asst. Prof. / CSE)
+
+    Graph Theory and Applications (CSDX 121)
+        Faculty: Mr. S.R. Senthil Kumar (Asst. Prof. / CSE)
+
+    Full Stack Mobile Application Development II (Back end) (CSDX 126)
+        Faculty: Mrs. S. Hemalatha (Asst. Prof. / CSE)
+
+    Web Hacking and Security (CSDX 127)
+        Faculty: Mrs. M.M. Noor Fasla (Asst. Prof. / CSE)
+
+    Social Media Security (CSDX 128)
+        Faculty: Mrs. A. Snegaa (Asst. Prof. / CSE)
+
+    Multimedia Security (CSDX 129)
+        Faculty: Dr. L. Arunraj (Assoc. Prof. / CSE)
+
+    API Design (CSDX 131)
+        Faculty: Mrs. A. Nazreen (Asst. Prof. / CSE)
+
+    AI Chat Bot Application (CSDX 142)
+        Faculty: Mrs. A. Saraswathi (Asst. Prof. / CSE)

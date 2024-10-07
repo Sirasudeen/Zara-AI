@@ -1,0 +1,17 @@
+### Academic Year: 2024–25
+
+**July 2024**:
+- 01 Mon: Start of classes for B.Tech final year students.
+- 08 Mon: CAT-1 begins for final year students. Review core topics such as Blockchain Technology and Graph Theory.
+    - **Tip**: Focus on problem-solving techniques for Graph Theory and review blockchain consensus mechanisms before CAT-1.
+- 15 Mon: CAT-1 results announced.
+
+**August 2024**:
+- 16 Fri: CAT-2 begins.
+    - **Tip**: Before CAT-2, dedicate time to revising Smart Contracts and Cryptography. Use mock tests to assess your understanding.
+- 25 Tue: Mid-term project reviews. Ensure your blockchain or DApp projects are up-to-date.
+
+**September 2024**:
+- 09 Mon: Final semester exams begin.
+    - **Tip**: Break down revision into blocks, starting with foundational courses like Graph Theory and Distributed Systems.
+- 15 Sun: Final year project submission deadline. Make sure to cross-check your submission requirements and do a final code review.

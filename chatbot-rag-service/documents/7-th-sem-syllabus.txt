@@ -1,0 +1,173 @@
+Blockchain Technology (CSD 4101)
+
+Modules:
+
+    Module I - Basics of Blockchain:
+        Concept and history of Blockchain.
+        Definition and fundamentals of Blockchain.
+        Characteristics and architecture of Blockchain.
+        Transactions, Chaining Blocks, Distributed Ledger Technologies (DLT), Decentralized Applications and Databases.
+
+    Module II - Cryptography:
+        Bitcoin structure, Merkle Trees, Bitcoin Block structure, Address, Transactions.
+        Ethereum Virtual Machine, Ethereum Wallets, Ethereum Development Tools.
+
+    Module III - Consensus:
+        Byzantine Agreement Methods, Decentralized Consensus.
+        Hashing in Blockchain and consensus attacks.
+
+    Module IV - Smart Contracts:
+        Proof of origin, Supply Chain Management, Medical Sciences, Finance, Legal Services, and Darknet.
+
+    Module V - Blockchain Mining and Use Cases:
+        Mining hardware and software, Bitcoin mining, Blockchain forks.
+        Blockchain use cases and case studies.
+
+Employability Skills (GED 4101)
+
+Modules:
+
+    Module I - Communication Skills:
+        Effective oral and written communication.
+        Presentation skills, listening skills, and group discussions.
+        Interpersonal communication and negotiation skills.
+
+    Module II - Technical Skills:
+        Resume writing, interview techniques, and technical documentation.
+        Domain-specific technical skills, online job portals, and application tracking systems.
+
+    Module III - Soft Skills:
+        Problem-solving and decision-making.
+        Leadership and teamwork.
+        Time management, stress management, and adaptability.
+
+    Module IV - Career Planning and Development:
+        Self-assessment, career goals, and SWOT analysis.
+        Networking skills, social media for job search, and job market trends.
+
+Professional Elective Courses Available in Semester VII
+Graph Theory and its Applications:
+
+    Introduction to Graph Theory.
+    Eulerian and Hamiltonian Graphs.
+    Graph Coloring, Matching, and Covering.
+    Planar Graphs and Graph Algorithms.
+
+Quantum Computing:
+
+    Basics of Quantum Mechanics.
+    Quantum Gates and Circuits.
+    Quantum Algorithms: Shor’s and Grover’s Algorithms.
+    Quantum Cryptography and Quantum Teleportation.
+
+Green Computing:
+
+    Energy-efficient computing techniques.
+    Green Data Centers, Cloud Computing.
+    Sustainable IT, Carbon Footprint reduction in IT.
+    Case studies on Green IT implementations.
+
+Security Evaluation and Assessment Methodology:
+
+    Security testing techniques.
+    Vulnerability assessments.
+    Penetration testing methods.
+    Security auditing and compliance.
+
+5G Wireless Communication Techniques:
+
+    Introduction to 5G networks.
+    5G architecture and radio access technologies.
+    Network slicing and virtualization in 5G.
+    Applications of 5G technologies.
+
+Full Stack Mobile Application Development II (Back end):
+
+    Back-end development for mobile applications.
+    Server-side scripting and APIs.
+    Database management for mobile applications.
+    Deployment and security in mobile apps.
+
+Web Hacking and Security:
+
+    Web security threats and vulnerabilities.
+    SQL injection, cross-site scripting (XSS), cross-site request forgery (CSRF).
+    Secure coding practices for web applications.
+    Penetration testing for web security.
+
+Social Media Security:
+
+    Privacy issues in social media platforms.
+    Social engineering attacks.
+    Tools and techniques for securing social media accounts.
+    Legal and ethical issues in social media security.
+
+Multimedia Security:
+
+    Digital watermarking and steganography.
+    Content protection and rights management.
+    Multimedia encryption techniques.
+    Security issues in multimedia streaming and broadcasting.
+
+Multimedia Communication and Networking:
+
+    Multimedia transmission over IP networks.
+    Quality of Service (QoS) in multimedia communications.
+    Multimedia streaming protocols.
+    Error control and compression in multimedia.
+
+API Design:
+
+    Principles of API design.
+    RESTful API design and development.
+    API documentation and versioning.
+    Securing APIs and API lifecycle management.
+
+Software Project Management:
+
+    Project planning, scheduling, and risk management.
+    Cost estimation techniques.
+    Quality management and software metrics.
+    Case studies on software project management.
+
+Enterprise Resource Planning (ERP):
+
+    Introduction to ERP systems.
+    ERP modules: Finance, HR, Manufacturing, etc.
+    ERP implementation lifecycle.
+    Case studies on ERP solutions in industries.
+
+Programming in Data Science with Python:
+
+    Introduction to Python for data science.
+    Data manipulation using Pandas and NumPy.
+    Data visualization techniques using Matplotlib and Seaborn.
+    Machine learning algorithms in Python.
+
+Genetic Algorithm:
+
+    Basics of genetic algorithms.
+    Genetic operators: Selection, Crossover, Mutation.
+    Applications of genetic algorithms in optimization.
+    Real-world examples of genetic algorithm implementations.
+
+Advanced SAS: Macros & SQL:
+
+    Introduction to SAS Macros.
+    SAS SQL programming for data management.
+    Advanced data manipulation using SAS.
+    Case studies using SAS in business analytics.
+
+Microservices Architecture (DevOps and Kubernetes):
+
+    Basics of microservices architecture.
+    Implementing DevOps practices in microservices.
+    Container orchestration using Kubernetes.
+    Case studies on microservices implementations.
+
+AI Chat Bot Application:
+
+    Introduction to AI chatbots.
+    Natural Language Processing (NLP) for chatbots.
+    Designing and implementing chatbot solutions.
+    Case studies on chatbot applications.

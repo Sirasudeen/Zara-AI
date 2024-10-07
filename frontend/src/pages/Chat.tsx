@@ -1,6 +1,7 @@
+// src/components/Chat.tsx
+
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { Box, Avatar, Typography, Button, IconButton } from "@mui/material";
-import red from "@mui/material/colors/red";
+import { Box, Avatar, Typography, Button, IconButton, CircularProgress } from "@mui/material";
 import { useAuth } from "../context/AuthContext";
 import ChatItem from "../components/chat/ChatItem";
 import { IoMdSend } from "react-icons/io";
@@ -11,26 +12,48 @@ import {
   sendChatRequest,
 } from "../helpers/api-communicator";
 import toast from "react-hot-toast";
+
+// Define the Message type
 type Message = {
   role: "user" | "assistant";
   content: string;
 };
+
 const Chat = () => {
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const auth = useAuth();
   const [chatMessages, setChatMessages] = useState<Message[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  // Handle sending user messages
   const handleSubmit = async () => {
-    const content = inputRef.current?.value as string;
+    const content = inputRef.current?.value.trim() as string;
+    if (!content) {
+      toast.error("Please enter a message");
+      return;
+    }
+
     if (inputRef && inputRef.current) {
       inputRef.current.value = "";
     }
+
     const newMessage: Message = { role: "user", content };
     setChatMessages((prev) => [...prev, newMessage]);
-    const chatData = await sendChatRequest(content);
-    setChatMessages([...chatData.chats]);
-    //
+    setIsLoading(true);
+
+    try {
+      const chatData = await sendChatRequest(content);
+      setChatMessages([...chatData.chats]);
+    } catch (error: any) {
+      console.log(error);
+      toast.error("Failed to send message");
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+  // Handle deleting chat history
   const handleDeleteChats = async () => {
     try {
       toast.loading("Deleting Chats", { id: "deletechats" });
@@ -42,6 +65,8 @@ const Chat = () => {
       toast.error("Deleting chats failed", { id: "deletechats" });
     }
   };
+
+  // Load chat history on component mount
   useLayoutEffect(() => {
     if (auth?.isLoggedIn && auth.user) {
       toast.loading("Loading Chats", { id: "loadchats" });
@@ -56,11 +81,14 @@ const Chat = () => {
         });
     }
   }, [auth]);
+
+  // Redirect to login if not authenticated
   useEffect(() => {
     if (!auth?.user) {
-      return navigate("/login");
+      navigate("/login");
     }
-  }, [auth]);
+  }, [auth, navigate]);
+
   return (
     <Box
       sx={{
@@ -70,72 +98,22 @@ const Chat = () => {
         height: "100%",
         mt: 3,
         gap: 3,
+        flexDirection: "column",
+        alignItems: "center",
       }}
     >
-      <Box
-        sx={{
-          display: { md: "flex", xs: "none", sm: "none" },
-          flex: 0.2,
-          flexDirection: "column",
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            width: "100%",
-            height: "60vh",
-            bgcolor: "#7E60BF",
-            borderRadius: 5,
-            flexDirection: "column",
-            mx: 3,
-          }}
-        >
-          <Avatar
-            sx={{
-              mx: "auto",
-              my: 2,
-              bgcolor: "white",
-              color: "black",
-              fontWeight: 700,
-            }}
-          >
-            {auth?.user?.name[0]}
-            {auth?.user?.name.split(" ")[1][0]}
-          </Avatar>
-          <Typography sx={{ mx: "auto", fontFamily: "work sans" }}>
-            You are talking to a ChatBOT
-          </Typography>
-          <Typography sx={{ mx: "auto", fontFamily: "work sans", my: 4, p: 3 }}>
-            You can ask some questions related to Knowledge, Business, Advices,
-            Education, etc. But avoid sharing personal information
-          </Typography>
-          <Button
-            onClick={handleDeleteChats}
-            sx={{
-              width: "200px",
-              my: "auto",
-              color: "#433878",
-              fontWeight: "700",
-              borderRadius: 3,
-              mx: "auto",
-              bgcolor: "#FFE1FF",
-              ":hover": {
-                bgcolor: "#E4B1F0",
-              },
-            }}
-          >
-            Clear Conversation
-          </Button>
-        </Box>
-      </Box>
+      {/* Main Chat Area */}
       <Box
         sx={{
           display: "flex",
-          flex: { md: 0.8, xs: 1, sm: 1 },
+          flex: 1,
           flexDirection: "column",
+          width: "100%",
+          maxWidth: "800px",
           px: 3,
         }}
       >
+        {/* Chatbot Title */}
         <Typography
           sx={{
             fontSize: "40px",
@@ -143,65 +121,113 @@ const Chat = () => {
             mb: 2,
             mx: "auto",
             fontWeight: "600",
+            backgroundColor: "#7E60BF",
+            padding: "10px 20px",
+            borderRadius: "10px",
           }}
         >
-          Zara - Ai
+          Zara - AI
         </Typography>
+
+        {/* Chat Messages Container */}
         <Box
           sx={{
             width: "100%",
-            height: "60vh",
+            flex: 1,
             borderRadius: 3,
             mx: "auto",
             display: "flex",
             flexDirection: "column",
-            overflow: "scroll",
-            overflowX: "hidden",
-            overflowY: "auto",
+            overflow: "auto",
             scrollBehavior: "smooth",
+            bgcolor: "#F5F5F5",
+            p: 2,
+            mb: 2,
           }}
         >
           {chatMessages.map((chat, index) => (
-            //@ts-ignore
             <ChatItem content={chat.content} role={chat.role} key={index} />
           ))}
+
+          {/* Loading Indicator */}
+          {isLoading && (
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                p: 2,
+                bgcolor: "#004d5612",
+                gap: 2,
+                borderRadius: 2,
+                my: 1,
+              }}
+            >
+              <Avatar sx={{ ml: "0" }}>
+                <img src="zara_avatar.png" alt="Zara" width={"30px"} />
+              </Avatar>
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <CircularProgress size={24} sx={{ mr: 2 }} />
+                <Typography sx={{ fontSize: "20px" }}>Zara is typing...</Typography>
+              </Box>
+            </Box>
+          )}
         </Box>
-        <div
-          style={{
+
+        {/* Chat Input Area */}
+        <Box
+          sx={{
             width: "100%",
             borderRadius: "20px",
             backgroundColor: "#E78F81",
             display: "flex",
             margin: "auto",
+            mt: 2,
           }}
         >
-          {" "}
           <input
             onKeyDown={(event) => {
-              if(event.key === "Enter")
-              {
+              if (event.key === "Enter") {
                 handleSubmit();
               }
             }}
             ref={inputRef}
             type="text"
+            placeholder="Ask Zara for help..."
             style={{
               width: "100%",
               backgroundColor: "#FFF5CD",
               padding: "20px",
-              border : "none",
+              border: "none",
               borderRadius: "20px",
               outline: "none",
               color: "#0B192C",
               fontSize: "20px",
-              
             }}
-
           />
           <IconButton onClick={handleSubmit} sx={{ color: "white", mx: 1 }}>
             <IoMdSend />
           </IconButton>
-        </div>
+        </Box>
+
+        {/* Clear Conversation Button */}
+        <Button
+          onClick={handleDeleteChats}
+          sx={{
+            width: "200px",
+            my: "auto",
+            color: "#433878",
+            fontWeight: "700",
+            borderRadius: 3,
+            mx: "auto",
+            bgcolor: "#FFE1FF",
+            ":hover": {
+              bgcolor: "#E4B1F0",
+            },
+            mt: 2,
+          }}
+        >
+          Clear Conversation
+        </Button>
       </Box>
     </Box>
   );
