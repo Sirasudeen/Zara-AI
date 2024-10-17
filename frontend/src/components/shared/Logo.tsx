@@ -12,7 +12,7 @@ const Logo = () => {
         marginTop:"2rem"
       }}
     >
-      <Link to={"/"}>
+      <Link to={"/"} > 
         <img
           src="openai.svg"
           alt="openai"
@@ -20,6 +20,7 @@ const Logo = () => {
           height={"90px"}
         />
       </Link>{" "}
+      <Link to={"/"} style={{ textDecoration: 'none' }} >
       <Typography
         sx={{
           display: { md: "block", sm: "none", xs: "none" },
@@ -28,11 +29,13 @@ const Logo = () => {
           fontFamily: "sans-serif",
           color: "#E78F81",
           fontSize: "2rem",
-          textShadow: "2px"
+          textShadow: "2px",
         }}
       >
         <span style={{ fontSize: "4rem", fontFamily:'Satisfy' }}>Zara</span>  -AI
       </Typography>
+      </Link>{" "}
+
     </div>
   );
 };

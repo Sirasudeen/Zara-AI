@@ -69,8 +69,8 @@ const ChatItem = ({
         my: 1,
       }}
     >
-      <Avatar sx={{ ml: "0" }}>
-        <img src="openai.png" alt="openai" width={"30px"} />
+      <Avatar sx={{ ml: "0", background: "transparent" }}>
+        <img src="openai.svg" alt="openai" width={"30px"} />
       </Avatar>
       <Box>
         {!messageBlocks.length && (
@@ -87,7 +87,7 @@ const ChatItem = ({
                 {block.code}
               </SyntaxHighlighter>
             ) : (
-              <Typography key={index} sx={{ fontSize: "20px" }}>
+              <Typography key={index} sx={{ fontSize: "20px",color:"black" }}>
                 {block.text}
               </Typography>
             )

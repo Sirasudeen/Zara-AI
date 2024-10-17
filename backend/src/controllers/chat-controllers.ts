@@ -2,6 +2,8 @@ import { NextFunction, Request, Response } from "express";
 import axios from "axios";
 import User from "../models/User.js";
 
+// src/controllers/chat-controllers.ts
+
 export const generateChatCompletion = async (
   req: Request,
   res: Response,
@@ -10,7 +12,7 @@ export const generateChatCompletion = async (
   const { message } = req.body;
   try {
     // Retrieve the user from the database
-    const user = await User.findById(res.locals.jwtData.id);
+    const user: IUser | null = await User.findById(res.locals.jwtData.id);
     if (!user) {
       return res
         .status(401)
@@ -26,7 +28,7 @@ export const generateChatCompletion = async (
     });
 
     // Get the assistant's response from the Python service
-    const botMessage = response.data.data;
+    const botMessage: string = response.data.data;
 
     // Append the assistant's response to the user's chat history
     user.chats.push({ content: botMessage, role: "assistant" });
@@ -36,9 +38,12 @@ export const generateChatCompletion = async (
     return res.status(200).json({ chats: user.chats });
   } catch (error: any) {
     console.log(error);
-    return res.status(500).json({ message: "Something went wrong", error: error.message });
+    return res
+      .status(500)
+      .json({ message: "Something went wrong", error: error.message });
   }
 };
+
 
 export const sendChatsToUser = async (
   req: Request,
