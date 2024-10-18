@@ -1,25 +1,37 @@
-import { TypeAnimation } from "react-type-animation";
+// src/components/TypingAnim.jsx
+import React, { useState, useEffect } from "react";
+import { Box, Typography } from "@mui/material";
+
+const messages = [
+  "Ace your academics with Zara 🤖",
+  "Your customized RAG application 💻",
+];
 
 const TypingAnim = () => {
-  return (
-    <TypeAnimation
-      sequence={[
-        // Same substring at the start will only be typed once, initially
-        "Ace your academics with Zara 🤖",
-        1000,
+  const [current, setCurrent] = useState(0);
+  const [fadeProp, setFadeProp] = useState({
+    fade: "fade-in",
+  });
 
-        "Your customized RAG application 💻",
-        1500,
-      ]}
-      speed={50}
-      style={{
-        fontSize: "4rem",
-        fontWeight:'400',
-        color: "#7E60BF",
-        display: "inline-block",
-      }}
-      repeat={Infinity}
-    />
+  useEffect(() => {
+    const fadeTimeout = setInterval(() => {
+      setFadeProp({ fade: "fade-out" });
+
+      setTimeout(() => {
+        setCurrent((prev) => (prev + 1) % messages.length);
+        setFadeProp({ fade: "fade-in" });
+      }, 1000); 
+    }, 3000); 
+
+    return () => clearInterval(fadeTimeout);
+  }, [current]);
+
+  return (
+    <Box className="typing-anim-container">
+      <Typography className={`typing-anim-text ${fadeProp.fade}`}>
+        {messages[current]}
+      </Typography>
+    </Box>
   );
 };
 

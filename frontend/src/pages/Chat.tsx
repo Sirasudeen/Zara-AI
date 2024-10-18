@@ -21,7 +21,6 @@ import {
 } from "../helpers/api-communicator";
 import toast from "react-hot-toast";
 
-// Define the Message type
 type Message = {
   role: "user" | "assistant";
   content: string;
@@ -44,7 +43,6 @@ const Chat = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
-  // Scroll to the bottom when new messages are added
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -53,7 +51,6 @@ const Chat = () => {
     scrollToBottom();
   }, [chatMessages, isLoading]);
 
-  // Handle sending user messages
   const handleSubmit = async () => {
     const content = inputRef.current?.value.trim();
     if (!content) {
@@ -88,7 +85,6 @@ const Chat = () => {
     }
   };
 
-  // Handle deleting chat history
   const handleDeleteChats = async () => {
     try {
       toast.loading("Deleting Chats", { id: "deletechats" });
@@ -101,7 +97,6 @@ const Chat = () => {
     }
   };
 
-  // Load chat history on component mount
   useEffect(() => {
     if (auth?.isLoggedIn && auth.user) {
       toast.loading("Loading Chats", { id: "loadchats" });
@@ -121,7 +116,6 @@ const Chat = () => {
     }
   }, [auth]);
 
-  // Redirect to login if not authenticated
   useEffect(() => {
     if (!auth?.user) {
       navigate("/login");
@@ -137,19 +131,19 @@ const Chat = () => {
         gap: 3,
         flexDirection: "column",
         alignItems: "center",
+        mt:"8rem",
         padding: 2,
         boxSizing: "border-box",
       }}
     >
-      {/* Main Chat Area and Zara AI Sidebar */}
       <Box
         sx={{
           display: "flex",
           flex: 1,
           width: "100%",
-          maxWidth: "1200px", // Increased maxWidth for larger screens
+          maxWidth: "1100px", 
           gap: 3,
-          flexDirection: { xs: "column", md: "row" }, // Stack on small screens, row on medium and up
+          flexDirection: { xs: "column", md: "row" }, 
         }}
       >
         {/* Chat Column */}
@@ -162,10 +156,9 @@ const Chat = () => {
             borderRadius: "10px",
             padding: 3,
             boxSizing: "border-box",
-            height: { xs: "auto", md: "80vh" }, // Adjust height for responsiveness
+            height: { xs: "auto", md: "80vh" }, 
           }}
         >
-          {/* Chat Messages Container */}
           <Box
             sx={{
               width: "100%",
@@ -178,21 +171,20 @@ const Chat = () => {
               bgcolor: "#F5F5F5",
               p: 2,
               mb: 1,
-              maxHeight: "80vh", // Adjusted maxHeight for better space utilization
+              maxHeight: "80vh", 
             }}
           >
             {chatMessages.map((chat, index) => (
               <ChatItem content={chat.content} role={chat.role} key={index} />
             ))}
 
-            {/* Loading Indicator */}
             {isLoading && (
               <Box
                 sx={{
                   display: "flex",
                   alignItems: "center",
                   p: 2,
-                  bgcolor: "#004d5612",
+                  bgcolor: "transparent",
                   gap: 2,
                   borderRadius: 2,
                   my: 1,
@@ -203,16 +195,13 @@ const Chat = () => {
                 </Avatar>
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                   <CircularProgress size={24} sx={{ mr: 2 }} />
-                  <Typography sx={{ fontSize: "20px" }}>Zara is typing...</Typography>
+                  <Typography sx={{ fontSize: "20px" , color:"black"}}>Zara is typing...</Typography>
                 </Box>
               </Box>
             )}
 
-            {/* Dummy div to scroll into view */}
-            <div ref={messagesEndRef} />
           </Box>
 
-          {/* Chat Input Area */}
           <Box
             sx={{
               width: "100%",
@@ -262,7 +251,6 @@ const Chat = () => {
           </Box>
         </Box>
 
-        {/* Zara AI Sidebar */}
         <Box
           sx={{
             display: "flex",
@@ -276,10 +264,9 @@ const Chat = () => {
             padding: 3,
             boxSizing: "border-box",
             color: "white",
-            height: { xs: "auto", md: "50vh" }, // Adjust height for responsiveness
+            height: { xs: "auto", md: "50vh" }, 
           }}
         >
-          {/* Zara AI Title */}
           <Typography
             sx={{
               fontSize: "24px",
@@ -290,7 +277,6 @@ const Chat = () => {
             Zara - AI
           </Typography>
 
-          {/* Zara AI Description */}
           <Typography
             sx={{
               fontSize: "16px",
@@ -300,7 +286,6 @@ const Chat = () => {
             Your personal AI assistant to help you with tasks, answer questions, and provide insights.
           </Typography>
 
-          {/* Clear Conversation Button */}
           <Button
             onClick={handleDeleteChats}
             sx={{

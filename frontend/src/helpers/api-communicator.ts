@@ -1,12 +1,10 @@
 import axios, { AxiosError } from "axios";
 
-// Set the base URL for Axios requests
-axios.defaults.baseURL = "http://localhost:5000"; // Adjust the base URL as per your backend configuration
+axios.defaults.baseURL = "http://localhost:5000"; 
 
-// Set up Axios interceptors to include the auth token in headers
 axios.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token"); // Adjust based on where you store the token
+    const token = localStorage.getItem("token");
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -15,11 +13,9 @@ axios.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Login function with improved error handling and token management
 export const loginUser = async (email: string, password: string) => {
   try {
     const { data } = await axios.post("/user/login", { email, password });
-    // Store the token in localStorage or cookies
     localStorage.setItem("token", data.token);
     return data;
   } catch (error: unknown) {
@@ -31,7 +27,6 @@ export const loginUser = async (email: string, password: string) => {
   }
 };
 
-// Signup function with improved error handling and token management
 export const signupUser = async (
   name: string,
   email: string,
@@ -43,7 +38,6 @@ export const signupUser = async (
       email,
       password,
     });
-    // Store the token
     localStorage.setItem("token", data.token);
     return data;
   } catch (error: unknown) {
@@ -55,7 +49,6 @@ export const signupUser = async (
   }
 };
 
-// Check authentication status
 export const checkAuthStatus = async () => {
   try {
     const { data } = await axios.get("/user/auth-status");
@@ -65,7 +58,6 @@ export const checkAuthStatus = async () => {
   }
 };
 
-// Send chat message
 export const sendChatRequest = async (message: string) => {
   try {
     console.log(message);
@@ -80,7 +72,6 @@ export const sendChatRequest = async (message: string) => {
   }
 };
 
-// Get all user chats
 export const getUserChats = async () => {
   try {
     const { data } = await axios.get("/chat/all-chats");
@@ -96,7 +87,6 @@ export const getUserChats = async () => {
   }
 };
 
-// Delete user chats
 export const deleteUserChats = async () => {
   try {
     const { data } = await axios.delete("/chat/delete");
@@ -110,11 +100,9 @@ export const deleteUserChats = async () => {
   }
 };
 
-// Logout user
 export const logoutUser = async () => {
   try {
     const { data } = await axios.get("/user/logout");
-    // Remove the token from localStorage
     localStorage.removeItem("token");
     return data;
   } catch (error: unknown) {
