@@ -6,9 +6,11 @@ import { toast } from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
 import './SpaceAnimation.css';
 import { useNavigate } from "react-router-dom";
+
 const Signup = () => {
   const navigate = useNavigate();
   const auth = useAuth();
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -24,105 +26,96 @@ const Signup = () => {
       toast.error("Signing Up Failed", { id: "signup" });
     }
   };
+
   useEffect(() => {
     if (auth?.user) {
       return navigate("/chat");
     }
-  }, [auth]);
+  }, [auth, navigate]);
+
   return (
-        
-      <Box
-        width={"100%"} 
-        height={"100%"}
-        display={"flex"}
-        flex={{ xs: 1, md: 0.5 }}
-        justifyContent={"center"}
-        alignItems={"center"}
-        padding={2}
-        mt={8}
-      >
-        <img src="/earth.png" alt="Earth" width={100} className="planet earth" />
+    <Box
+      className="container"
+      width={"100%"}
+      height={"100vh"}
+      display={"flex"}
+      flexDirection={"row"}
+      justifyContent={"center"}
+      alignItems={"center"}
+      padding={2}
+      position="relative"
+      overflow="hidden"
+    >
+      <img src="/earth.png" alt="Earth" width={100} className="planet earth" />
       <img src="/saturn.png" alt="Saturn" width={100} className="planet saturn" />
       <img src="/comet.svg" alt="Comet" width={100} className="comet" />
-        <Box padding={8} marginLeft={65} display={{ md: "flex", sm: "none", xs: "none" }}
-        sx={{
-          animation: 'sway 2s infinite alternate',
 
+      <Box
+        sx={{
+          width: "600px",
+          position:"absolute",
+          right: "7rem",
+          animation: "sway 2s infinite alternate",
         }}
-        >
-        <img src="astronaut.svg" alt="Robot" style={{ width: "600px" }} />
+        display={{ md: "flex", sm: "none", xs: "none" }}
+      >
+        <img src="astronaut.svg" alt="Robot" className="astronaut" />
       </Box>
 
-        <form
-          onSubmit={handleSubmit}
-          style={{
-            margin: "auto",
-            padding: "30px",
-            borderRadius: "10px",
-            border: "none",
-            background : "#D8D2C2",
-            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
-            top: "15rem",
-            position: 'absolute',
-            animation: 'sway 2s infinite alternate',
-          }}
-        >
-          <Box
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          animation: 'sway 2s infinite alternate',
+        }}
+        className="form sway"
+      >
+        <Box className="form-content">
+          <Typography
+            variant="h4"
+            textAlign="center"
+            fontWeight={600}
             sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-
-
+              color: "#B17457"
             }}
           >
-            <Typography
-              variant="h4"
-              textAlign="center"
-              padding={2}
-              fontWeight={600}
-              sx={{
-            color: "#B17457"
-              }}
-            >
-              Sign up
-            </Typography>
-            <CustomizedInput type="text" name="name" label="Name" />
-            <CustomizedInput type="email" name="email" label="Email" />
-            <CustomizedInput type="password" name="password" label="Password" />
-            <Button
-              type="submit"
-              sx={{
-                px: 2,
-                py: 1,
-                mt: 2,
-                width: "400px",
-                borderRadius: 2,
-                bgcolor: "#00fffc",
-                ":hover": {
-                  bgcolor: "white",
-                  color: "black",
-                },
-              }}
-              endIcon={<IoIosLogIn />}
-            >
-              Signup
-            </Button>
-       <style>
-        {`
-          @keyframes sway {
-            0% {
-              transform: translateY(0);
-            }
-            100% {
-              transform: translateY(-10px);
-            }
-          }
-        `}
-      </style>
-          </Box>
-        </form>
-      </Box>
+            Sign Up
+          </Typography>
+          <CustomizedInput type="text" name="name" label="Name" />
+          <CustomizedInput type="email" name="email" label="Email" />
+          <CustomizedInput type="password" name="password" label="Password" />
+          <Button
+            type="submit"
+            className="button"
+            sx={{
+              px: 2,
+              py: 1,
+              mt: 2,
+              borderRadius: 2,
+              bgcolor: "#00fffc",
+              ":hover": {
+                bgcolor: "white",
+                color: "black",
+              },
+            }}
+            endIcon={<IoIosLogIn />}
+          >
+            Signup
+          </Button>
+          <style>
+            {`
+              @keyframes sway {
+                0% {
+                  transform: translateY(0);
+                }
+                100% {
+                  transform: translateY(-10px);
+                }
+              }
+            `}
+          </style>
+        </Box>
+      </form>
+    </Box>
   );
 };
 

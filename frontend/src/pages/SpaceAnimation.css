@@ -1,98 +1,218 @@
-  body {
-    margin: 0;
-    overflow: hidden; /* Prevent scrolling */
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.space-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  overflow: hidden;
+}
+
+.planet {
+  position: absolute;
+  opacity: 0.8;
+  height: auto;
+}
+
+.comet {
+  position: absolute;
+  opacity: 0.8;
+  height: auto;
+}
+
+.earth {
+  animation: floatEarth 50s infinite alternate ease-in-out;
+}
+
+.saturn {
+  animation: floatSaturn 60s infinite alternate ease-in-out;
+}
+
+.comet {
+  animation: floatComet 20s linear infinite;
+  animation-delay: 5s;
+}
+
+@keyframes floatEarth {
+  0% {
+    transform: translate(100vw, -30rem);
+  }
+  20% {
+    transform: translate(-30rem, 10rem);
+  }
+  40% {
+    transform: translate(-50rem, 20rem);
+  }
+  60% {
+    transform: translate(-20rem, 40rem);
+  }
+  80% {
+    transform: translate(10rem, 60rem);
+  }
+  100% {
+    transform: translate(100vw, 100rem);
+  }
+}
+
+@keyframes floatSaturn {
+  0% {
+    transform: translate(0, 0);
+  }
+  20% {
+    transform: translate(-60rem, 20rem);
+  }
+  40% {
+    transform: translate(40rem, 30rem);
+  }
+  60% {
+    transform: translate(-30rem, -25rem);
+  }
+  80% {
+    transform: translate(50rem, 10rem);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes floatComet {
+  0% {
+    transform: translate(100vw,-50rem);
+  }
+  50% {
+    transform: translate(0,0);
+  }
+  100% {
+    transform: translate(-100vh,30rem);
+  }
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.astronaut-box {
+  width: 600px;
+  position: absolute;
+  right: 15rem;
+  animation: sway 2s infinite alternate;
+}
+
+.form {
+  background: #D8D2C2;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 10rem;
+  width: 400px;
+}
+
+.form-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-title {
+  color: #B17457;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+.button {
+  padding: 0.75rem 1.5rem;
+  margin-top: 1.5rem;
+  width: 100%;
+  border-radius: 8px;
+  background-color: #00fffc;
+  color: black;
+  font-size: 1.25rem;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.button:hover {
+  background-color: white;
+  color: black;
+}
+
+@media (max-width: 480px) {
+  .container {
+    flex-direction: column;
+    padding: 1rem;
+    margin-top: 1.2rem;
   }
 
-  .space-container {
-    position: absolute;
+  .astronaut-box {
+    display: none;
+  }
+
+  .form {
+    position: relative;
     top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: black; /* Space background */
-    overflow: hidden; /* Prevent overflowing */
+    margin-right: auto;
+    height: "80%";
+    margin-left: 0.9rem;
+    width: 70%;
+    padding: 1rem;
+    margin-top: 0.5rem;
   }
 
-  .planet {
-    position: absolute;
-    opacity: 0.8; /* Slightly transparent */
-    height: auto; /* Keep aspect ratio */
+  .form-title {
+    font-size: 1.2rem;
   }
 
+  .button {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .signup-form input {
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+
+  .planet,
   .comet {
-    position: absolute;
-    opacity: 0.8; /* Slightly transparent */
-    height: auto; /* Keep aspect ratio */
+    width: 60px !important;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .signup-form {
+    width: 80%;
+    padding: 2rem;
   }
 
-  .earth {
-    animation: floatEarth 50s infinite alternate ease-in-out;
+  .form-title {
+    font-size: 1.75rem;
   }
 
-  .saturn {
-    animation: floatSaturn 60s infinite alternate ease-in-out;
+  .signup-button {
+    font-size: 1.1rem;
+    padding: 0.6rem 1.2rem;
   }
 
+  .signup-form input {
+    font-size: 1.1rem;
+    padding: 0.6rem;
+  }
+
+  .planet,
   .comet {
-    animation: floatComet 20s linear infinite;
-    animation-delay: 5s;
+    width: 80px !important;
   }
-
-  /* Earth floating animation */
-  @keyframes floatEarth {
-    0% {
-      transform: translate(100vw, -30rem); /* Start from the right side, above the viewport */
-    }
-    20% {
-      transform: translate(-30rem, 10rem); /* Float slightly to the left and down */
-    }
-    40% {
-      transform: translate(-50rem, 20rem); /* Continue floating down */
-    }
-    60% {
-      transform: translate(-20rem, 40rem); /* Float a bit to the right and down */
-    }
-    80% {
-      transform: translate(10rem, 60rem); /* Float further down and slightly to the right */
-    }
-    100% {
-      transform: translate(100vw, 100rem); /* Move off the screen to the right */
-    }
-  }
-  
-
-  /* Saturn floating animation */
-  @keyframes floatSaturn {
-    0% {
-      transform: translate(0, 0);
-    }
-    20% {
-      transform: translate(-60rem, 20rem); /* Adjust to float in random direction */
-    }
-    40% {
-      transform: translate(40rem, 30rem); /* Adjust to float in random direction */
-    }
-    60% {
-      transform: translate(-30rem, -25rem); /* Adjust to float in random direction */
-    }
-    80% {
-      transform: translate(50rem, 10rem); /* Adjust to float in random direction */
-    }
-    100% {
-      transform: translate(0, 0);
-    }
-  }
-
-  /* Comet floating animation */
-  @keyframes floatComet {
-    0% {
-      transform: translate(100vw,-50rem); /* Start just above the viewport */
-    }
-    50% {
-      transform: translate(0,0); /* Move to the bottom of the viewport */
-    }
-    100% {
-      transform: translate(-100vh,30rem); /* Instantly reposition to above the viewport */
-    }
-  }
-  
+}

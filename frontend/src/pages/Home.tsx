@@ -1,8 +1,5 @@
-// src/components/Home.jsx
-import React from "react";
 import { Box, Typography, Button, useMediaQuery, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import TypingAnim from "./../components/typer/TypingAnim"; // Adjust the path if necessary
 import { Player } from "@lottiefiles/react-lottie-player";
 
 const Home = () => {
@@ -32,15 +29,11 @@ const Home = () => {
           textAlign: "left",
           gap: "2rem",
           marginTop: { xs: "2rem", md: "3rem" },
-          marginRight: "auto",
+          marginRight: { xs: "3.5rem", md: "auto" },
           maxWidth: "auto",
           width: "auto",
         }}
       >
-        {/* Animated Text */}
-        <TypingAnim />
-
-        {/* Text and Button */}
         <Box
           sx={{
             flex: 1,
@@ -95,15 +88,16 @@ const Home = () => {
           </Button>
         </Box>
       </Box>
+      {!isSmallScreen && (
         <Box>
-        <Player
-      autoplay
-      loop
-      src="home-robot.json" // Path to your Lottie JSON file
-      style={{ height: "500px", width: "500px",marginRight:"12rem" }}
-    >
-    </Player>
+          <Player
+            autoplay
+            loop
+            src="home-robot.json"
+            style={{ height: "500px", width: "500px", marginRight: "12rem" }}
+          />
         </Box>
+      )}
     </Box>
   );
 };

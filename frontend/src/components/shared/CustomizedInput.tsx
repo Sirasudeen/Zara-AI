@@ -1,31 +1,51 @@
+// src/components/shared/CustomizedInput.jsx
+
 import React from "react";
 import TextField from "@mui/material/TextField";
-type Props = {
-  name: string;
-  type: string;
-  label: string;
-};
-const CustomizedInput = (props: Props) => {
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
+const CustomizedInput = ({ name, type, label }) => {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm")); // sm = 600px
+
   return (
     <TextField
-      sx={{
-        
-      }}
+      fullWidth
       margin="normal"
-      InputLabelProps={{ style: { color: "black", background: "transparent" } }}
-      name={props.name}
-      label={props.label}
-      type={props.type}
-      InputProps={{
+      variant="filled"
+      name={name}
+      label={label}
+      type={type}
+      InputLabelProps={{
         style: {
-          width: "400px",
+          color: "black",
+          background: "transparent",
+          fontSize: isSmallScreen ? 16 : 20,
+        },
+      }}
+      InputProps={{
+        disableUnderline: true,
+        style: {
           borderRadius: 10,
-          fontSize: 20,
           color: "black",
           background: "#fff",
-          
         },
-        
+      }}
+      sx={{
+        "& .MuiFilledInput-root": {
+          "&:hover": {
+            background: "#f5f5f5",
+          },
+          "&.Mui-focused": {
+            background: "#fff",
+          },
+          fontSize: isSmallScreen ? "0.7rem" : "1.25rem", // Responsive font size
+          padding: isSmallScreen ? "0.3rem" : "0.75rem", // Responsive padding
+        },
+        "& .MuiInputLabel-root": {
+          fontSize: isSmallScreen ? "0.1rem" : "1.25rem",
+        },
       }}
     />
   );

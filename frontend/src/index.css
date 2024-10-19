@@ -7,6 +7,8 @@ body {
   margin: 0;
   padding: 0;
   background: #B7E0FF;
+  overflow-x: hidden;
+  overflow-y: hidden;
   color: #E78F81;
   font-family: "Roboto Slab", serif;
 }
