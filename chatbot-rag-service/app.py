@@ -19,6 +19,24 @@ CORS(app)
 index = None
 cache = {}
 
+Prompt = [{'role': 'user', 'content': """ You are Zara, the Academic Superhero with a witty, fun, and motivational personality. Your job is to help students plan their study schedules, reduce stress, and provide useful academic advice—using humor and creativity as your secret weapons.
+
+When students ask you questions, use your advanced generative AI knowledge to create smart, funny, and personalized responses. Use the information from the context given with every user query to keep answers factually correct but focus more on creating an engaging, funny, and helpful interaction.
+
+Key things you do:
+- Help students make effective study plans.
+- Give funny motivational tips that keep students excited.
+- Offer stress-busting advice with humor.
+- Make academic suggestions in a lighthearted but accurate way.
+
+Example response styles:
+- " Looking to conquer Blockchain? No problem! Grab a coffee, open up those modules, and remember: blocks aren’t just for kids anymore!”
+- “Oh, you’ve got a CAT exam coming up? Time to hit the books like a pro—because nothing says ‘ready’ like practicing cryptography while imagining you're hacking the Matrix.”
+
+Keep things informative but always deliver them with a twist of humor to make the student smile and feel less stressed! 
+From next message onwards... you are going to play this role I have given...good luck
+"""}]
+
 def build_index():
     try:
         print("Building the index...")
@@ -26,8 +44,7 @@ def build_index():
         print(f"Loaded {len(documents)} document(s).")
 
         llm = ChatOpenAI(
-            temperature=0.8,  # Balanced creativity
-            top_p=0.9,
+            temperature=0.3 ,  # Balanced creativity
             model_name='gpt-4o-mini',  # Cost-effective model
             openai_api_key=openai_api_key,
             max_tokens=300  # Keep responses short and focused
@@ -60,6 +77,7 @@ def chat():
     try:
         data = request.json
         user_message = data.get('text').lower() 
+        chatHistory = data.get('history', [])
 
         if not user_message:
             return jsonify({'error': 'No text provided'}), 400
@@ -69,45 +87,35 @@ def chat():
             return jsonify({'data': cache[query_hash]}), 200
 
         index = load_index()
-
         query_engine = index.as_query_engine(
             prompt_template="""
-            You are Zara, a witty, fun, and creative academic assistant. Your goal is to help students manage stress, study effectively, and stay motivated.
-            Use a lighthearted, humorous tone in your responses. Feel free to make jokes, use funny analogies, and be creative while giving practical advice.
-            Always ensure that your advice is helpful but deliver it in a fun, engaging way that makes students smile.
-            when asked about subject look at syllabus and give help.
+                Infer factual information from the documents
+"""
 
-            Your Personality:
-            - Tone: Witty, supportive, and engaging.
-            - Role: Help students manage academic stress, provide study tips, organize study schedules, and offer motivational boosts.
-            Feeling the academic heat? Deadlines lurking around every corner? Fear not! Meet Zara, your friendly (and occasionally witty) Academic Stress Management Chatbot, here to make your college journey smoother and a whole lot less stressful.
-🎓 What can you do?
-
-    Stress Busting Tips: From breathing exercises to time management hacks, Zara's got your back.
-    Study Schedules: Need a game plan for your study sessions? Zara crafts personalized schedules to keep you on track.
-    Syllabus Insights: Decode those cryptic syllabi with ease. Zara helps you understand course requirements and key dates.
-    Resource Sharing: Access lecture notes, recommended readings, and other study materials without breaking a sweat.
-    Motivational Boosts: When the going gets tough, Zara sends you a dose of motivation to keep you pushing forward.
-    Campus Info: Got questions about campus resources, events, or policies? Just ask Zara!
-            Make funny responses often like:
-        😂 A Little Fun to Lighten the Mood
-
-        Why did the student bring a ladder to class?
-        Because they heard the grades were on another level! 😄
-
-        You believes that a little laughter goes a long way in easing stress. 
-
-            Use the academic documents (syllabus, schedule, faculty details) to provide accurate information, but inject humor and creativity into your responses.
-            """
         )
 
-
-
         print(f"Querying the index with user message: {user_message}")
-        response = query_engine.query(user_message)
-        bot_message = response.response
+        context_response = query_engine.query(user_message)
+        context_info = context_response.response    
+        print(f"Chat History : {chatHistory}")
+        print(f"Context : {context_info}")
+        prompt=f"""
+            Based on the above information(chat history) and below context...give proper response for user query(Student message)
+            
+            Context: {context_info}
+            Student message: {user_message}
+            """
+        response = openai.chat.completions.create(
+            model="gpt-4o-mini",  # Ensure you're using the correct model name here
+            messages = Prompt + chatHistory + [{"role": "user", "content": prompt}],   
+            temperature=0.8,
+            max_tokens=200,
+        )
 
+        bot_message = response.choices[0].message.content      
         cache[query_hash] = bot_message
+        chatHistory.append({"role": "user", "content": user_message})
+        chatHistory.append({"role": "assistant", "content": bot_message})
 
         print(f"User message: {user_message}")
         print(f"Bot response: {bot_message}")
@@ -126,3 +134,4 @@ if __name__ == '__main__':
         print("Loading index from storage...")
         index = load_index()
     app.run(host='0.0.0.0', port=5001)
+    

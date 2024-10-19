@@ -78,10 +78,8 @@ const ChatItem = ({
           alignItems: "flex-start",
         }}
       >
-        <Avatar sx={{ background: "#7E60BF" }}>
-          <Typography variant="body1" color="white">
-            Z
-          </Typography>
+        <Avatar sx={{ background: "transparent" }}>
+          <img src="openai.svg" alt="" />
         </Avatar>
         <Box>
           {messageBlocks.map((block, index) =>

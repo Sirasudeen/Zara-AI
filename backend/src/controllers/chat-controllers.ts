@@ -3,39 +3,44 @@ import axios from "axios";
 import User from "../models/User.js";
 
 
-export const generateChatCompletion = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const generateChatCompletion = async (req, res, next) => {
   const { message } = req.body;
   try {
-    const user: IUser | null = await User.findById(res.locals.jwtData.id);
+    const user = await User.findById(res.locals.jwtData.id);
     if (!user) {
-      return res
-        .status(401)
-        .json({ message: "User not registered OR Token malfunctioned" });
+      return res.status(401).json({ message: "User not registered OR Token malfunctioned" })                      ;
     }
 
-    user.chats.push({ content: message, role: "user" });
+    // Load chat history from MongoDB
+    const chatHistory = user.chats;
 
+    // Append the new user message
+    chatHistory.push({ content: message, role: "user" });
+
+    // Send the chat message and full history to the RAG service
     const response = await axios.post("http://localhost:5001/chat", {
       text: message,
+      history: chatHistory.map((chat) => ({
+        role: chat.role, 
+        content: chat.content
+      })),
+      
     });
 
-    const botMessage: string = response.data.data;
+    const botMessage = response.data.data;
 
-    user.chats.push({ content: botMessage, role: "assistant" });
+    // Append bot response to chat history and save to MongoDB
+    chatHistory.push({ content: botMessage, role: "assistant" });
+    user.chats = chatHistory;
     await user.save();
 
-    return res.status(200).json({ chats: user.chats });
-  } catch (error: any) {
+    return res.status(200).json({ chats: chatHistory });
+  } catch (error) {
     console.log(error);
-    return res
-      .status(500)
-      .json({ message: "Something went wrong", error: error.message });
+    return res.status(500).json({ message: "Something went wrong", error: error.message });
   }
 };
+
 
 
 export const sendChatsToUser = async (
