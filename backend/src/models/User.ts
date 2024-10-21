@@ -1,20 +1,27 @@
-import mongoose from "mongoose";
-import { randomUUID } from "crypto";
-const chatSchema = new mongoose.Schema({
+// src/models/User.ts
+
+import mongoose, { Schema, model } from 'mongoose';
+import { IUser } from '../interfaces/IUser.js';
+import { IChat } from '../interfaces/IChat.js';
+import { randomUUID } from 'crypto';
+
+const chatSchema: Schema<IChat> = new Schema({
   id: {
     type: String,
-    default: randomUUID(),
+    default: () => randomUUID(),
   },
   role: {
     type: String,
     required: true,
+    enum: ['user', 'assistant'], // Ensuring role is either 'user' or 'assistant'
   },
   content: {
     type: String,
     required: true,
   },
 });
-const userSchema = new mongoose.Schema({
+
+const userSchema: Schema<IUser> = new Schema({
   name: {
     type: String,
     required: true,
@@ -23,12 +30,17 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
+    // Consider adding email validation here
   },
   password: {
     type: String,
     required: true,
   },
-  chats: [chatSchema],
+  chats: {
+    type: [chatSchema],
+    default: [],
+  },
 });
 
-export default mongoose.model("User", userSchema);
+// Export the User model with the IUser interface
+export default model<IUser>('User', userSchema);

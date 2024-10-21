@@ -1,11 +1,11 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "This is an AI Chatbot application, inspired by ChatGPT, by using MERN Stack and OpenAI",
-  "main": "index.ts",
+  "description": "This is an AI Chatbot application, uses RAG technology, MERN Stack and OpenAI",
+  "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\" ",
+    "dev": " \"npx tsc --watch\" \"nodemon -q dist/index.js\" ",
     "build": "tsc",
     "start": "node dist/index.js"
   },
@@ -21,6 +21,7 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-validator": "^7.0.1",
+    "helmet": "^8.0.0",
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.4.2",
     "morgan": "^1.10.0",
