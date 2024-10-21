@@ -1,0 +1,7 @@
+openai
+flask
+flask_cors
+llama_index
+langchain_openai
+python-dotenv
+gunicorn
