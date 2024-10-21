@@ -1,28 +1,27 @@
-import { NextFunction, Request, Response } from "express";
+// backend/utils/validators.ts
+
 import { body, ValidationChain, validationResult } from "express-validator";
+import { Request, Response, NextFunction } from "express";
 
 export const validate = (validations: ValidationChain[]) => {
   return async (req: Request, res: Response, next: NextFunction) => {
-    for (let validation of validations) {
-      const result = await validation.run(req);
-      if (!result.isEmpty()) {
-        break;
-      }
-    }
+    await Promise.all(validations.map(validation => validation.run(req)));
+
     const errors = validationResult(req);
     if (errors.isEmpty()) {
       return next();
     }
+
     return res.status(422).json({ errors: errors.array() });
   };
 };
 
 export const loginValidator = [
-  body("email").trim().isEmail().withMessage("Email is required"),
+  body("email").trim().isEmail().withMessage("Valid email is required"),
   body("password")
     .trim()
     .isLength({ min: 6 })
-    .withMessage("Password should contain atleast 6 characters"),
+    .withMessage("Password should contain at least 6 characters"),
 ];
 
 export const signupValidator = [
@@ -31,5 +30,5 @@ export const signupValidator = [
 ];
 
 export const chatCompletionValidator = [
-  body("message").notEmpty().withMessage("Message  is required"),
+  body("message").notEmpty().withMessage("Message is required"),
 ];

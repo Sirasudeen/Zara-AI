@@ -1,97 +1,77 @@
+// backend/controllers/user-controllers.ts
+
 import { NextFunction, Request, Response } from "express";
 import User from "../models/User.js";
 import { hash, compare } from "bcrypt";
 import { createToken } from "../utils/token-manager.js";
+import { validate, signupValidator, loginValidator } from "../utils/validators.js";
 import { COOKIE_NAME } from "../utils/constants.js";
-import dotenv from 'dotenv';
-dotenv.config();
 
-const COOKIE_OPTIONS = {
-  path: "/",
-  expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days
-  httpOnly: true,
-  signed: true,
-  sameSite: "none" as const, // Corrected to lowercase 'none'
-  secure: true,
-   domain: process.env.BACKEND_URL, // Set this if needed
-};
+export const userSignup = [
+  validate(signupValidator),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { name, email, password } = req.body;
 
-export const getAllUsers = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    // Get all users
-    const users = await User.find();
-    return res.status(200).json({ message: "OK", users });
-  } catch (error: any) {
-    console.log(error);
-    return res.status(500).json({ message: "ERROR", cause: error.message });
-  }
-};
+      const existingUser = await User.findOne({ email });
+      if (existingUser) return res.status(409).json({ message: "User already registered" });
 
-export const userSignup = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    // User signup
-    const { name, email, password } = req.body;
-    const existingUser = await User.findOne({ email });
-    if (existingUser) return res.status(401).send("User already registered");
+      const hashedPassword = await hash(password, 10);
 
-    const hashedPassword = await hash(password, 10);
-    const user = new User({ name, email, password: hashedPassword });
-    await user.save();
+      const user = new User({ name, email, password: hashedPassword });
+      await user.save();
 
-    // Create token
-    const token = createToken(user._id.toString(), user.email, "7d");
+      const token = createToken(user._id.toString(), user.email, "7d");
 
-    // Set new cookie
-    res.cookie(COOKIE_NAME, token, COOKIE_OPTIONS);
+      res.cookie(COOKIE_NAME, token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ?"none":"strict",
+        maxAge: 7 * 24 * 60 * 60 * 1000, 
+        path: "/",
+      });
 
-    return res
-      .status(201)
-      .json({ message: "OK", name: user.name, email: user.email });
-  } catch (error: any) {
-    console.log(error);
-    return res.status(500).json({ message: "ERROR", cause: error.message });
-  }
-};
-
-export const userLogin = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    // User login
-    const { email, password } = req.body;
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(401).send("User not registered");
+      return res.status(201).json({ message: "User registered successfully" });
+    } catch (error: any) {
+      console.error("Signup Error:", error);
+      return res.status(500).json({ message: "Internal Server Error", error: error.message });
     }
-    const isPasswordCorrect = await compare(password, user.password);
-    if (!isPasswordCorrect) {
-      return res.status(403).send("Incorrect Password");
-    }
-
-    // Create token
-    const token = createToken(user._id.toString(), user.email, "7d");
-
-    // Set new cookie
-    res.cookie(COOKIE_NAME, token, COOKIE_OPTIONS);
-
-    return res
-      .status(200)
-      .json({ message: "OK", name: user.name, email: user.email });
-  } catch (error: any) {
-    console.log(error);
-    return res.status(500).json({ message: "ERROR", cause: error.message });
   }
-};
+];
+
+export const userLogin = [
+  validate(loginValidator),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { email, password } = req.body;
+
+      const user = await User.findOne({ email });
+      if (!user) {
+        return res.status(401).json({ message: "Invalid email or password" });
+      }
+
+      const isMatch = await compare(password, user.password);
+      if (!isMatch) {
+        return res.status(401).json({ message: "Invalid email or password" });
+      }
+
+      const token = createToken(user._id.toString(), user.email, "7d");
+
+      res.cookie(COOKIE_NAME, token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ?"none":"strict",
+        maxAge: 7 * 24 * 60 * 60 * 1000, 
+        path: "/",
+      });
+
+      return res.status(200).json({ message: "Login successful" });
+    } catch (error: any) {
+      console.error("Login Error:", error);
+      return res.status(500).json({ message: "Internal Server Error", error: error.message });
+    }
+  }
+];
 
 export const verifyUser = async (
   req: Request,
@@ -99,20 +79,17 @@ export const verifyUser = async (
   next: NextFunction
 ) => {
   try {
-    // User token check
-    const user = await User.findById(res.locals.jwtData.id);
+    const jwtData = res.jwtData!;
+
+    const user = await User.findById(jwtData.id).select("-password");
     if (!user) {
-      return res.status(401).send("User not registered or token malfunctioned");
+      return res.status(401).json({ message: "User not found" });
     }
-    if (user._id.toString() !== res.locals.jwtData.id) {
-      return res.status(401).send("Permissions didn't match");
-    }
-    return res
-      .status(200)
-      .json({ message: "OK", name: user.name, email: user.email });
+
+    return res.status(200).json({ message: "Authenticated", user });
   } catch (error: any) {
-    console.log(error);
-    return res.status(500).json({ message: "ERROR", cause: error.message });
+    console.error("Auth Status Verification Error:", error);
+    return res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 };
 
@@ -122,23 +99,30 @@ export const userLogout = async (
   next: NextFunction
 ) => {
   try {
-    // User logout
-    const user = await User.findById(res.locals.jwtData.id);
-    if (!user) {
-      return res.status(401).send("User not registered or token malfunctioned");
-    }
-    if (user._id.toString() !== res.locals.jwtData.id) {
-      return res.status(401).send("Permissions didn't match");
-    }
+    res.clearCookie(COOKIE_NAME, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      path: "/",
+    });
 
-    // Clear cookie
-    res.clearCookie(COOKIE_NAME, COOKIE_OPTIONS);
-
-    return res
-      .status(200)
-      .json({ message: "OK", name: user.name, email: user.email });
+    return res.status(200).json({ message: "Logout successful" });
   } catch (error: any) {
-    console.log(error);
-    return res.status(500).json({ message: "ERROR", cause: error.message });
+    console.error("Logout Error:", error);
+    return res.status(500).json({ message: "Internal Server Error", error: error.message });
+  }
+};
+
+export const getAllUsers = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const users = await User.find().select("-password");
+    return res.status(200).json({ message: "OK", users });
+  } catch (error: any) {
+    console.error("Error fetching users:", error);
+    return res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 };

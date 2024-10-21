@@ -1,34 +1,25 @@
-import { Request, Response, NextFunction } from "express";
-import jwt from "jsonwebtoken";
-import { COOKIE_NAME } from "./constants.js";
+// backend/utils/token-manager.ts
 
-export const createToken = (id: string, email: string, expiresIn: string) => {
-  const payload = { id, email };
-  const token = jwt.sign(payload, process.env.JWT_SECRET, {
-    expiresIn,
-  });
-  return token;
+import jwt from "jsonwebtoken";
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+interface JwtData {
+  id: string;
+  email: string;
+}
+
+export const createToken = (id: string, email: string, expiresIn: string): string => {
+  return jwt.sign({ id, email }, process.env.JWT_SECRET!, { expiresIn });
 };
 
-export const verifyToken = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const token = req.signedCookies[`${COOKIE_NAME}`];
-  if (!token || token.trim() === "") {
-    return res.status(401).json({ message: "Token Not Received" });
+export const verifyToken = (token: string): JwtData | null => {
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as JwtData;
+    return decoded;
+  } catch (error) {
+    console.error("Token verification failed:", error);
+    return null;
   }
-  return new Promise<void>((resolve, reject) => {
-    return jwt.verify(token, process.env.JWT_SECRET, (err, success) => {
-      if (err) {
-        reject(err.message);
-        return res.status(401).json({ message: "Token Expired" });
-      } else {
-        resolve();
-        res.locals.jwtData = success;
-        return next();
-      }
-    });
-  });
 };

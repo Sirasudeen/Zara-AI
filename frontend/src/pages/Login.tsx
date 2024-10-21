@@ -1,3 +1,5 @@
+// frontend/src/pages/Login.tsx
+
 import React, { useEffect } from "react";
 import { IoIosLogIn } from "react-icons/io";
 import { Box, Typography, Button } from "@mui/material";
@@ -7,10 +9,10 @@ import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import './SpaceAnimation.css';
 
-
 const Login = () => {
   const navigate = useNavigate();
   const auth = useAuth();
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -20,16 +22,18 @@ const Login = () => {
       toast.loading("Signing In", { id: "login" });
       await auth?.login(email, password);
       toast.success("Signed In Successfully", { id: "login" });
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
-      toast.error("Signing In Failed", { id: "login" });
+      toast.error(error.message || "Signing In Failed", { id: "login" });
     }
   };
+
   useEffect(() => {
-    if (auth?.user) {
-      return navigate("/chat");
+    if (auth?.isLoggedIn && auth.user) {
+      navigate("/chat");
     }
-  }, [auth]);
+  }, [auth, navigate]);
+
   return (
     <Box 
       className="container"
@@ -43,10 +47,12 @@ const Login = () => {
       position="relative"
       overflow="hidden"
     >
-
+      {/* Space Animations */}
       <img src="/earth.png" alt="Earth" width={100} className="planet earth" />
       <img src="/saturn.png" alt="Saturn" width={100} className="planet saturn" />
       <img src="/comet.svg" alt="Comet" width={100} className="comet" />
+      
+      {/* Astronaut Image for Larger Screens */}
       <Box padding={8} marginLeft={65} display={{ md: "flex", sm: "none", xs: "none" }}
         sx={{
           animation: 'sway 2s infinite alternate',
@@ -54,6 +60,8 @@ const Login = () => {
       >
         <img src="astronaut.svg" alt="Robot" style={{ width: "600px" }} />
       </Box>
+      
+      {/* Login Form */}
       <form
         onSubmit={handleSubmit}
         style={{

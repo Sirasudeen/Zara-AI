@@ -134,9 +134,10 @@ const ChatItem = ({
           alignItems: "flex-start",
         }}
       >
-        <Avatar sx={{ bgcolor: "#0B192C" }}>
-          {auth?.user?.name[0].toUpperCase()}
-        </Avatar>
+          <Avatar sx={{ bgcolor: "#0B192C" }}>
+            { "U"} {/* Fallback initial */}
+          </Avatar>
+
         <Box>
           {messageBlocks.map((block, index) =>
             block.isCode ? (
