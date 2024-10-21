@@ -10,7 +10,7 @@ import hashlib
 
 load_dotenv()
 
-openai_api_key = os.getenv('OPENAI_API_KEY')
+openai_api_key = os.getenv('OPENAI_API_KEY' )
 openai.api_key = openai_api_key
 
 app = Flask(__name__)
@@ -134,6 +134,6 @@ if __name__ == '__main__':
         print("Loading index from storage...")
         index = load_index()
     
-    port = int(os.getenv('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    Port = int(os.getenv('PORT'))
+    app.run(host='0.0.0.0', port=Port)
     
