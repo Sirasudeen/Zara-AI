@@ -1,7 +1,11 @@
   import axios, { AxiosError } from "axios";
 
-  axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
+  const baseDomain = import.meta.env.VITE_BACKEND_URL;
+  const apiVersion = '/api/v1';
 
+  axios.defaults.baseURL = `${baseDomain}${apiVersion}`;
+
+  
   axios.interceptors.request.use(
     (config) => {
       const token = localStorage.getItem("token");
