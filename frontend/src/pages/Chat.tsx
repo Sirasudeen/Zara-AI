@@ -71,7 +71,6 @@ const Chat = () => {
       if (chatData && chatData.chats) {
         setChatMessages([...chatData.chats]);
       } else if (chatData && chatData.message) {
-        // If chatData.chats is not defined, append the assistant's message
         const assistantMessage: Message = { role: "assistant", content: chatData.message };
         setChatMessages((prev) => [...prev, assistantMessage]);
       } else {

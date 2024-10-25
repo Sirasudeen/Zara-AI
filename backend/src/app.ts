@@ -10,7 +10,6 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-// Load environment variables in development only
 if (process.env.NODE_ENV !== "production") {
   dotenv.config();
 }
@@ -21,21 +20,18 @@ const app = express();
 app.use(helmet());
 
 // Determine CORS origin based on environment
-const allowedOrigin = process.env.FRONTEND_URL || "http://localhost:5173";
+const allowedOrigin = process.env.FRONTEND_URL;
 
 app.use(cors({ origin: allowedOrigin, credentials: true }));
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
-// Use morgan only in development
 if (process.env.NODE_ENV !== "production") {
   app.use(morgan("dev"));
 }
 
-// Use the main router
 app.use("/api/v1", appRouter);
 
-// Health check endpoint
 app.get("/health", (req, res) => {
   res.json({ status: "healthy" });
 });

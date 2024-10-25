@@ -1,4 +1,3 @@
-// backend/routes/chat-routes.ts
 
 import { Router } from "express";
 import { verifyJWT } from "../middleware/authMiddleware.js";
@@ -9,7 +8,6 @@ import {
   sendChatsToUser,
 } from "../controllers/chat-controllers.js";
 
-// Protected API
 const chatRoutes = Router();
 
 chatRoutes.post(

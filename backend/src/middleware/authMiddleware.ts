@@ -1,4 +1,3 @@
-// backend/middleware/authMiddleware.ts
 
 import { Request, Response, NextFunction } from "express";
 import { verifyToken } from "../utils/token-manager.js";

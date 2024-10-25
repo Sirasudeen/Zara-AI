@@ -1,20 +1,26 @@
-import { connect, disconnect } from "mongoose";
-async function connectToDatabase() {
-  try {
-    await connect(process.env.MONGODB_URL);
-  } catch (error) {
-    console.log(error);
-    throw new Error("Could not Connect To MongoDB");
-  }
-}
+// backend/db/connection.ts
 
-async function disconnectFromDatabase() {
-  try {
-    await disconnect();
-  } catch (error) {
-    console.log(error);
-    throw new Error("Could not Disconnect From MongoDB");
-  }
-}
+import mongoose, { ConnectOptions } from "mongoose";
+import dotenv from "dotenv";
 
-export { connectToDatabase, disconnectFromDatabase };
+dotenv.config();
+
+export const connectToDatabase = async (): Promise<void> => {
+  const mongoUri = process.env.MONGODB_URL;
+  
+  if (!mongoUri) {
+    console.error("Error: MONGODB_URL environment variable is not defined.");
+    process.exit(1); // Exit process with failure
+  }
+
+  try {
+    await mongoose.connect(mongoUri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    } as ConnectOptions);
+    console.log("Connected to MongoDB");
+  } catch (error) {
+    console.error("MongoDB Connection Error:", error);
+    throw error;
+  }
+};

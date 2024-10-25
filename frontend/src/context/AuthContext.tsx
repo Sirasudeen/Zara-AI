@@ -22,19 +22,17 @@ const AuthContext = createContext<UserAuth | null>(null);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [loading, setLoading] = useState<boolean>(true); // To handle initial auth check
+  const [loading, setLoading] = useState<boolean>(true); 
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    // Prevent auth check on public routes
     const publicRoutes = ["/login", "/signup","/"];
     if (publicRoutes.includes(location.pathname)) {
       setLoading(false);
       return;
     }
 
-    // Fetch if the user's cookies are valid, then set auth state
     async function checkStatus() {
       try {
         const data = await checkAuthStatus();
@@ -46,7 +44,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         console.error("Authentication check failed:", error);
         setIsLoggedIn(false);
         setUser(null);
-        // Redirect to login only if not already on a public route
         if (!publicRoutes.includes(location.pathname)) {
           navigate("/login");
         }
@@ -60,32 +57,30 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const login = async (email: string, password: string) => {
     try {
       await loginUser(email, password);
-      // After login, fetch auth status to get user info
       const authData = await checkAuthStatus();
       if (authData && authData.user) {
         setUser({ email: authData.user.email, name: authData.user.name });
         setIsLoggedIn(true);
-        navigate("/chat"); // Redirect to chat after successful login
+        navigate("/chat");
       }
     } catch (error) {
       console.error("Login failed:", error);
-      throw error; // Rethrow to handle in components
+      throw error; 
     }
   };
 
   const signup = async (name: string, email: string, password: string) => {
     try {
       await signupUser(name, email, password);
-      // After signup, fetch auth status to get user info
       const authData = await checkAuthStatus();
       if (authData && authData.user) {
         setUser({ email: authData.user.email, name: authData.user.name });
         setIsLoggedIn(true);
-        navigate("/chat"); // Redirect to chat after successful signup
+        navigate("/chat"); 
       }
     } catch (error) {
       console.error("Signup failed:", error);
-      throw error; // Rethrow to handle in components
+      throw error; 
     }
   };
 
@@ -94,10 +89,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       await logoutUser();
       setIsLoggedIn(false);
       setUser(null);
-      navigate("/login"); // Redirect to login after logout
+      navigate("/login");
     } catch (error) {
       console.error("Logout failed:", error);
-      throw error; // Rethrow to handle in components
+      throw error; 
     }
   };
 
@@ -110,7 +105,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   if (loading) {
-    return <div>Loading...</div>; // Or a spinner/loading indicator
+    return <div>Loading...</div>; 
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

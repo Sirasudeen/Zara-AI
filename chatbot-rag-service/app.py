@@ -134,6 +134,5 @@ if __name__ == '__main__':
         print("Loading index from storage...")
         index = load_index()
     
-    Port = int(os.getenv('PORT'))
-    app.run(host='0.0.0.0', port=Port)
+    app.run(host='0.0.0.0', port=5001)
     

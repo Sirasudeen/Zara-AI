@@ -13,7 +13,7 @@ const chatSchema: Schema<IChat> = new Schema({
   role: {
     type: String,
     required: true,
-    enum: ['user', 'assistant'], // Ensuring role is either 'user' or 'assistant'
+    enum: ['user', 'assistant'], 
   },
   content: {
     type: String,
@@ -30,7 +30,6 @@ const userSchema: Schema<IUser> = new Schema({
     type: String,
     required: true,
     unique: true,
-    // Consider adding email validation here
   },
   password: {
     type: String,
@@ -42,5 +41,4 @@ const userSchema: Schema<IUser> = new Schema({
   },
 });
 
-// Export the User model with the IUser interface
 export default model<IUser>('User', userSchema);

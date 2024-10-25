@@ -20,6 +20,5 @@ userRoutes.post("/login", validate(loginValidator), userLogin);
 // Protected Routes
 userRoutes.get("/auth-status", verifyJWT, verifyUser);
 userRoutes.post("/logout", verifyJWT, userLogout);
-userRoutes.get("/", verifyJWT, getAllUsers); // Example protected route to get all users
-
+userRoutes.get("/", verifyJWT, getAllUsers); 
 export default userRoutes;

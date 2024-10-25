@@ -25,8 +25,8 @@ export const userSignup = [
 
       res.cookie(COOKIE_NAME, token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: process.env.NODE_ENV === "production" ?"none":"strict",
+        secure: true,
+        sameSite: "none",
         maxAge: 7 * 24 * 60 * 60 * 1000, 
         path: "/",
       });
@@ -59,10 +59,11 @@ export const userLogin = [
 
       res.cookie(COOKIE_NAME, token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: process.env.NODE_ENV === "production" ?"none":"strict",
+        secure: true,
+        sameSite: "none",
         maxAge: 7 * 24 * 60 * 60 * 1000, 
         path: "/",
+
       });
 
       return res.status(200).json({ message: "Login successful" });
@@ -101,8 +102,7 @@ export const userLogout = async (
   try {
     res.clearCookie(COOKIE_NAME, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      secure: true,
       path: "/",
     });
 
