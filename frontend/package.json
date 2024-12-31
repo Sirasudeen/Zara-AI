@@ -15,6 +15,7 @@
     "@lottiefiles/react-lottie-player": "^3.5.4",
     "@mui/icons-material": "^6.1.4",
     "@mui/material": "^6.1.4",
+    "@reactuses/core": "^6.0.1",
     "axios": "^1.7.7",
     "framer-motion": "^11.11.9",
     "react": "^18.2.0",
@@ -25,6 +26,7 @@
     "react-router-dom": "^6.16.0",
     "react-syntax-highlighter": "^15.5.0",
     "react-type-animation": "^3.1.0",
+    "react-use": "^17.6.0",
     "uuid": "^10.0.0"
   },
   "devDependencies": {

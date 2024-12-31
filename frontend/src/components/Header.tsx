@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Logo from "./shared/Logo";
@@ -7,13 +7,41 @@ import NavigationLink from "./shared/NavigationLink";
 import { Box, IconButton, Menu, MenuItem } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from "react-router-dom";
+import { useWindowScroll } from "react-use";
+
 
 const Header = () => {
+
+  const {y:currentScrollY} = useWindowScroll();
+  
+  const [lastScrollY,setLastScrollY] = useState(0);
+  const [HeaderbgVis,setHeaderbgVis] = useState(false);
+  const [HeaderBG,setHeaderBG] = useState('transparent');
+  useEffect(() => {
+      if(currentScrollY === 0){
+          setHeaderbgVis(true);
+          setHeaderBG('transparent');
+      }
+      else if(currentScrollY > lastScrollY)
+      {
+         setHeaderbgVis(false);
+      }
+      else if(currentScrollY < lastScrollY)
+      {
+        setHeaderBG('grey');
+        setHeaderbgVis(true)
+      }
+
+      setLastScrollY(currentScrollY);
+  },[currentScrollY])
+
   const auth = useAuth();
   const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const isMenuOpen = Boolean(anchorEl);
+
+
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -43,7 +71,8 @@ const Header = () => {
     <>
       <AppBar
         sx={{
-          bgcolor: "transparent",
+          bgcolor: HeaderBG,
+          visibility: HeaderbgVis ? "visible": "hidden",
           position: "fixed",
           top: 0,
           left: 0,
