@@ -8,6 +8,14 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Player } from '@lottiefiles/react-lottie-player';
+import {useGSAP} from '@gsap/react'
+import gsap from 'gsap';
+import TextPlugin from 'gsap/TextPlugin';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+import zIndex from '@mui/material/styles/zIndex';
+
+gsap.registerPlugin(TextPlugin);
+gsap.registerPlugin(ScrollTrigger);
 
 
 
@@ -16,36 +24,107 @@ const Home = () => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
+
+  useGSAP(()=>{
+    const tl = gsap.timeline();
+    gsap.set('.introBot',{
+      scale : 0
+
+    })
+    gsap.set(".intro",{
+      x: "+=110%",
+      scale: 1.3,
+      ease: 'power1.out'
+    })
+    gsap.set(".introSub",{
+      opacity : '0',
+        })
+
+  
+  
+    tl.to("#intro",{
+      text: "Hi, I'am Zara.",
+      duration: 2,
+      delay: 1
+    })
+    tl.to('.introSub',{
+      opacity: '100',
+      duration: 1,
+      ease: 'power1.inOut'
+    },">");
+
+    tl.to('.intro',{
+      x:"-=90%",
+      scale: 1,
+      ease : 'power4.inOut',
+      duration: 2,
+    },">")
+    .to('.introBot',{
+      scale: 1,
+      duration: 2,
+      ease: "power1.inOut"
+    },"<")
+  })
+
+
+
+  useGSAP(()=>{
+    gsap.set('.section-1',{
+      clipPath: 'ellipse(63% 60% at 38% 44%)'
+    })
+
+    gsap.to('.section-1',{
+      clipPath: 'ellipse(40% 52% at 35% 47%)',
+      ease: "power1.inOut",
+      scrollTrigger: {
+        trigger: ".section-1",
+        start: 'center center',
+        scrub : true,
+        end: 'bottom center'
+      }
+    })
+  })
   return (
     <Box width="100%" sx={{ backgroundColor: '#FFAD60',overflow: 'auto' }}>
       {/* Hero Section */}
       <Box
       sx={{
-        display:'flex',
-        flexDirection: 'row',
-        minHeight: '90vh',
-        gap: '30rem',
-        padding: { xs: '2rem', md: '4rem' },
-        backgroundColor: 'powderblue',
+        minHeight: '100vh',
       }}
       >
-
       <Box
+      className = "section-1"
+
+      sx={{
+        display:'flex',
+        width: '100vw',
+        position: "absolute",
+        gap: '30rem',
+        minHeight: '100vh',
+        zIndex: 30,
+        background: 'url("bg.jpg")'
+      }}
+      
+      >
+      <Box
+        className='intro'
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'left',
-          textAlign: 'left',
+          alignItems: isSmallScreen ?'center': 'left',
+          textAlign: isSmallScreen ?'center': 'left',
           justifyContent: 'center'
 
         }}
       >
         <Typography
+        id='intro'
           sx={{ fontWeight: 650, color: '#1E3E62', fontSize: '4.5rem' }}
         >
-          Hi, I'am Zara.
+          
         </Typography>
         <Typography
+          className='introSub'
           sx={{
             fontSize: { xs: '1.4rem', md: '1.8rem' },
             color: '#1E3E62',
@@ -57,6 +136,7 @@ const Home = () => {
           step of the way.
         </Typography>
         <Button
+        className= 'introSub'
           onClick={() => navigate('/signup')}
           sx={{
             backgroundColor: '#FFAD60',
@@ -74,21 +154,46 @@ const Home = () => {
           Get Started
         </Button>
         
-      </Box>
-      <Box
+
+        </Box>
+        {   !isSmallScreen &&   <Box
+      className= 'introBot'
+
       sx={{
-        justifyContent: 'center',
-      }}
+             position: 'absolute',
+             zIndex: 40,
+             bottom: 50,
+             right: 48
+        }}
       >
           <Player
+
             autoplay
             loop
             src='home-robot.json'
-            style={{ height: '600px', width: '600px', marginTop: "12rem" }}
+            style={{ height: '800px', width: '800px' }}
           />
-        </Box>
-      </Box>
+        </Box>}
 
+      </Box>
+      </Box>
+      {   !isSmallScreen &&   <Box
+      sx={{
+        position: "absolute",
+        justifyContent: 'center',
+        bottom: "2.3rem",
+        left: "66.8rem",
+        zIndex: 70
+      }}
+      >
+          <Player
+
+            autoplay
+            loop
+            src='home-robot.json'
+            style={{ height: '800px', width: '800px', marginTop: "12rem" }}
+          />
+        </Box>}
 
       {/* Features Section */}
       <Box sx={{ padding: { xs: '2rem', md: '4rem',minHeight: '100vh' }, backgroundColor: '#FFAD60' }}>
