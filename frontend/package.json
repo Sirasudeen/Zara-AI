@@ -17,6 +17,7 @@
     "@mui/icons-material": "^6.1.4",
     "@mui/material": "^6.1.4",
     "@reactuses/core": "^6.0.1",
+    "@studio-freight/lenis": "^1.0.42",
     "axios": "^1.7.7",
     "framer-motion": "^11.11.9",
     "gsap": "^3.12.5",
