@@ -117,8 +117,27 @@ const Home = () => {
   })
 
 
+  useEffect(()=> {
+    gsap.set("path",{
+      strokeDasharray: pathLength
+    })
+
+    gsap.fromTo('path',{
+      strokeDashoffset: pathLength
+    },{
+      strokeDashoffset: 0,
+      scrollTrigger: {
+         trigger: ".section-2",
+         scrub:true,
+          start: "top top+100",
+          end: 'bottom bottom',
+
+      }
+    })
+  })
   useGSAP(()=>{
     const tl =gsap.timeline();
+
 
     gsap.set('.section2-subtitle',{
         x:"+=100rem"
@@ -150,22 +169,6 @@ const Home = () => {
           pin: true,
           end: '+=100'
         }
-    })
-    gsap.set("path",{
-      strokeDasharray: pathLength
-    })
-
-    gsap.fromTo('path',{
-      strokeDashoffset: pathLength
-    },{
-      strokeDashoffset: 0,
-      scrollTrigger: {
-         trigger: ".section-2",
-         scrub:true,
-          start: "top top+100",
-          end: 'bottom bottom',
-
-      }
     })
 
     gsap.fromTo('.Feature1  ',{
@@ -370,19 +373,7 @@ const Home = () => {
 
   {/* Right side: Zara-AI and Features */}
   <Box display="flex" flexDirection="column" alignItems="flex-start" gap="2rem" marginTop="2rem">
-    <Typography className='section2-subtitle'
-      variant="h2" // Smaller size for "Zara-AI"
-      sx={{ fontWeight: 700, color: '#1E3E62' }}
-    >
-      Zara-AI
-    </Typography>
-    <Typography
-    className='section2-subtitle'
-      variant="h2" // Smaller size for "Features"
-      sx={{ fontWeight: 700, color: '#1E3E62' }}
-    >
-      Features
-    </Typography>
+
   </Box>
 </Box>
 
