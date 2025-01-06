@@ -39,6 +39,7 @@ const StyledLink = styled(Link)<Props>(({ bg, textColor }) => ({
   display: "inline-block",
   padding: "10px 20px",
   margin: "0 10px",
+  fontFamily:"Poppins",
   borderRadius: "5px",
   background: bg,
   color: textColor,

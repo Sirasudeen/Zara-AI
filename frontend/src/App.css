@@ -5,6 +5,11 @@
   text-align: center;
 }
 
+@font-face {
+  font-family: "Hey Comic";
+  src: url("/fonts/HeyComic/Hey_Comic.ttf") format('truetype');
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

@@ -6,6 +6,7 @@ import {
   useTheme,
   Grid,
 } from '@mui/material';
+
 import { useNavigate } from 'react-router-dom';
 import { Player } from '@lottiefiles/react-lottie-player';
 import {useGSAP} from '@gsap/react'
@@ -13,8 +14,9 @@ import gsap from 'gsap';
 import TextPlugin from 'gsap/TextPlugin';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import Feature from '../components/Feature';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Lenis from '@studio-freight/lenis';
+import { transform } from 'framer-motion';
 
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(TextPlugin);
@@ -118,35 +120,33 @@ const Home = () => {
 
 
   useGSAP(()=>{
-    const tl =gsap.timeline();
 
     gsap.set('.section2-subtitle',{
-        x:"+=100rem"
+        x:"+=100rem",
+        opacity:"0"
     })
-    tl.fromTo('.section2-title',{
-        x:"-=100rem",
-        opacity: '0',
-        transform: 'rotate(58deg) translate(-44px, 0px) skew(0deg, 13deg)'
+    gsap.fromTo('.section2-title',{
+        opacity:'0',
+        transform:"translateY(100%)",
+        transition: "all 1s"
     },{
-        x:"+=79.5rem",
-        transform: 'none',
-        opacity: '100',
-        ease: 'sine.inOut',
+        transform: 'translateY(0)',
+        opacity: '1',
         scrollTrigger:{
-          trigger: ".section-2",
+          trigger: ".section2-title",
           start: 'top bottom',
           scrub: true,
-          end: 'top center-200'
+          end: '+20'
         }
     })
 
-    tl.to('.section2-subtitle',{
+    gsap.to('.section2-subtitle',{
         x:"-=120rem",
+        opacity:"100",
         duration:1,
-        ease: 'bounce.inOut',
         scrollTrigger:{
           trigger: ".section-2",
-          start: 'top center-50',
+          start: 'top center',
           pin: true,
           end: '+=100'
         }
@@ -167,9 +167,9 @@ const Home = () => {
     scrub: true,
     end: '+=400'
   }
-})
+},)
 
-        tl.fromTo('.Feature2  ',{
+gsap.fromTo('.Feature2  ',{
           opacity: '0',
 
     },{
@@ -185,7 +185,7 @@ const Home = () => {
         end: '+=400'
       }
     })
-    tl.fromTo('.Feature3  ',{
+    gsap.fromTo('.Feature3  ',{
       opacity: '0',
 
       },{
@@ -206,7 +206,7 @@ const Home = () => {
 
       ScrollTrigger.refresh();
 
-  })
+  },null)
 
 useGSAP(()=>{
   gsap.to('path',{
@@ -219,7 +219,7 @@ useGSAP(()=>{
 
     }
   })
-}, null);
+}, null);  
 
   useGSAP(()=>{
     gsap.set('.section-1',{
@@ -236,7 +236,101 @@ useGSAP(()=>{
         end: 'bottom center'
       }
     })
+  }, null)
+
+  useLayoutEffect(()=> {
+    gsap.set(".section-3",{
+      clipPath: "ellipse(69% 72% at 37% 75%)"
+    })
+    gsap.fromTo('.How',{
+      opacity:'0',
+      transform:"translateY(100%)",
+      transition: "all 1s"
+    },{
+      opacity: "1",
+      transform:"translateY(0)",
+      scrollTrigger:{
+        trigger:".How",
+        start: "top bottom",
+        end: "+=100",
+        scrub: true
+      }
+    })
+
+    gsap.fromTo('.Step1',{
+      opacity:'0',
+      transform:"translateY(100%)",
+      transition: "all 1s"
+    },{
+      opacity: "1",
+      transform:"translateY(0)",
+      scrollTrigger:{
+        trigger:".Step1",
+        start: "top bottom",
+        end: "+=100",
+        scrub: true
+      }
+    })
+    gsap.fromTo('.Step2',{
+      opacity:'0',
+      transform:"translateY(100%)",
+      transition: "all 1s"
+    },{
+      opacity: "1",
+      transform:"translateY(0)",
+      scrollTrigger:{
+        trigger:".Step2",
+        start: "top bottom",
+        end: "+=100",
+        scrub: true
+      }
+
+    })   
+    gsap.fromTo('.Step3',{
+      opacity:'0',
+      transform:"translateY(100%)",
+      transition: "all 1s"
+    },{
+      opacity: "1",
+      transform:"translateY(0)",
+      scrollTrigger:{
+        trigger:".Step3",
+        start: "top bottom",
+        end: "+=100",
+        scrub: true
+      }
+
+    })
+
+    const tl = gsap.timeline({
+      scrollTrigger:{
+        trigger: ".section-3",
+        start: "center bottom",
+        end: "bottom top",
+        scrub: true
+      }
+    })
+
+    tl.to(".Step3",{
+      y: 200
+    },0)
+   
+    tl.to(".Step2",{
+      y: 150
+    },0)
+    tl.to(".Step1",{
+      y: 50
+    },0)
+
+    ScrollTrigger.refresh();
+
+
   })
+
+
+
+
+
   return (
     <Box width="100%" sx={{ backgroundColor: '#FFAD60',overflow: 'auto' }}>
       {/* Hero Section */}
@@ -272,7 +366,7 @@ useGSAP(()=>{
       >
         <Typography
         id='intro'
-          sx={{ fontWeight: 650, color: '#1E3E62', fontSize: '4.5rem' }}
+          sx={{ fontWeight: 650, color: '#1E3E62', fontSize: '4.5rem',fontFamily:"Hey Comic" }}
         >
           
         </Typography>
@@ -280,7 +374,8 @@ useGSAP(()=>{
           className='introSub'
           sx={{
             fontSize: { xs: '1.4rem', md: '1.8rem' },
-            color: '#1E3E62',
+            color: '#3E5879',
+
             maxWidth: '600px',
             marginTop: '1rem',
           }}
@@ -345,7 +440,7 @@ useGSAP(()=>{
 
             autoplay
             loop
-            src='home-robot.json'
+            src='home-robot2.json'
             style={{ height: '800px', width: '800px', marginTop: "12rem" }}
           />
         </Box>}
@@ -361,32 +456,22 @@ useGSAP(()=>{
   {/* Left side: Explore */}
   <Typography
     className='section2-title'
-    sx={{ fontSize: '15rem',fontWeight: 700, color: '#1E3E62' , }}
+    sx={{mr:"35rem", fontSize: '15rem',fontWeight: 700, color: '#1E3E62' , }}
   >
-    Explore
+    FEATURES
+
   </Typography>
 
   {/* Right side: Zara-AI and Features */}
   <Box display="flex" flexDirection="column" alignItems="flex-start" gap="2rem" marginTop="2rem">
-    <Typography className='section2-subtitle'
-      variant="h2" // Smaller size for "Zara-AI"
-      sx={{ fontWeight: 700, color: '#1E3E62' }}
-    >
-      Zara-AI
-    </Typography>
-    <Typography
-    className='section2-subtitle'
-      variant="h2" // Smaller size for "Features"
-      sx={{ fontWeight: 700, color: '#1E3E62' }}
-    >
-      Features
-    </Typography>
+
+
   </Box>
 </Box>
 
         <Grid left={'10rem'} position={'absolute'} container spacing={4}>
           {/* Feature 1 */}
-          <Grid left={'7rem'} top={'15.5rem'} position={'absolute'} dataSpeed="0.25" item xs={12} md={4}>
+          <Grid left={'7rem'} top={'15.5rem'} position={'absolute'} item xs={12} md={4}>
               <Feature ClassName="Feature Feature1" Title='Academic Support' Description='Get personalized help with studies to keep you on track and achieve your goals.' />
           </Grid>
 
@@ -422,44 +507,132 @@ stroke="#1E3E62" strokeWidth="3"/>
 
       {/* How It Works Section */}
       <Box
+      className="section-3"
         sx={{
-          padding: { xs: '2rem', md: '4rem',minHeight: '100vh'  },
-          backgroundColor: '#FFFFFF',
+          display:"flex",
+          flexDirection:"column",
+          padding: { xs: '2rem', md: '4rem',minHeight: '150vh'  },
+          backgroundColor: '#FFFAF4',
           textAlign: 'center',
         }}
       >
         <Typography
-          variant="h4"
-          sx={{ fontWeight: 700, color: '#1E3E62', marginBottom: '2rem' }}
+        className='How'
+          sx={{ fontWeight: 700, color: '#1E3E62',mt:"15vh",ml:"17vh", marginBottom: '2rem',fontSize:"9rem",width:"80vh" }}
         >
-          How It Works
+          HOW IT WORKS
         </Typography>
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={4}>
-            <Typography variant="h6" sx={{ fontWeight: 600, color: '#1E3E62' }}>
-              1. Ask a Question
+        <Box 
+        sx={{
+          display:"flex",
+          flexDirection:"row",
+          gap:"4rem",
+          mt:"4rem",
+          textAlign:"left",
+        }}>
+          <Box 
+          className="Step1"
+          data-speed="1"
+          sx={{
+            display:"flex",
+            flexDirection:"column",
+            width:"50vh",
+
+          }}
+          >
+                      <Player
+                autoplay
+                loop
+                src='ask-question.json'
+                style={{ height: '350px', width: '350px' }}
+                />
+            <Typography variant="h6" sx={{ml:"10vh", fontWeight: 600, color: '#1E3E62',fontSize:"2.5rem" }}>
+              Ask a Question
             </Typography>
-            <Typography sx={{ color: '#555' }}>
+            <Typography sx={{ ml:"10vh",color: '#555',width:"35vh",fontFamily:"Poppins",
+            fontWeight:"500",fontSize:"1.3rem" }}>
               Submit your queries to Zara-AI and let the chatbot work its magic.
             </Typography>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Typography variant="h6" sx={{ fontWeight: 600, color: '#1E3E62' }}>
-              2. Get Personalized Help
+          </Box>
+          <Box marginTop={30}>
+          <svg className='Step2' width="100" height="100" viewBox="0 0 168 168" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_304_265)">
+<path stroke="#9AA6B2" fill-rule="evenodd" clip-rule="evenodd" d="M7.57805 46.9883C68.0713 34.4739 114.729 75.8571 140.656 127.351C141.103 128.235 142.183 128.594 143.067 128.147C143.951 127.7 144.31 126.619 143.863 125.736C117.213 72.7981 69.0363 30.6078 6.84848 43.4738C5.87925 43.6723 5.25595 44.6224 5.45597 45.5959C5.65445 46.5651 6.60457 47.1883 7.57805 46.9883Z" fill="#9AA6B2"/>
+<path stroke="#9AA6B2" fill-rule="evenodd" clip-rule="evenodd" d="M141.774 125.577C139.153 123.821 135.888 121.581 135.511 121.337C125.27 114.742 114.555 110.088 102.789 106.839C101.835 106.574 100.844 107.137 100.579 108.092C100.314 109.047 100.877 110.037 101.832 110.302C113.242 113.449 123.635 117.96 133.568 124.359C134.147 124.731 141.483 129.771 143.043 130.679C143.681 131.054 144.158 131.068 144.271 131.061C144.873 131.044 145.256 130.785 145.51 130.528C145.794 130.237 146.146 129.641 146.11 128.748C146.069 127.813 145.509 125.904 145.407 125.411C143.884 117.967 141.535 109.791 140.902 101.8C140.298 94.1801 141.257 86.7195 146.292 80.3255C146.906 79.5477 146.769 78.4163 145.991 77.8026C145.213 77.1889 144.082 77.3257 143.468 78.1036C137.84 85.2533 136.647 93.5663 137.321 102.082C137.951 110.025 140.222 118.147 141.774 125.577Z" fill="#9AA6B2" />
+</g>
+<defs>
+<clipPath id="clip0_304_265">
+<rect width="130" height="130" fill="white" transform="translate(45.1514 167.311) rotate(-110)"/>
+</clipPath>
+</defs>
+</svg>
+          </Box>
+
+          <Box     
+          data-speed="0.8"
+          className="Step2"
+
+          sx={{
+            display:"flex",
+            flexDirection:"column",
+            width:"50vh",
+
+          }}
+          >
+                                  <Player
+                autoplay
+                loop
+                src='Personalized-help.json'
+                style={{height: '350px', width: '350px' }}
+                />
+            <Typography  sx={{ mt:0,fontWeight: 600, color: '#1E3E62',fontSize:"2.5rem" }}>
+              Get Personalized Help
             </Typography>
-            <Typography sx={{ color: '#555' }}>
+            <Typography sx={{ color: '#555',fontFamily:"Poppins",
+            fontWeight:"500",fontSize:"1.3rem"  }}>
               Zara-AI retrieves relevant information and crafts helpful responses.
             </Typography>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Typography variant="h6" sx={{ fontWeight: 600, color: '#1E3E62' }}>
-              3. Achieve Your Goals
+          </Box>
+          <Box marginTop={30}>
+          <svg className='Step3' width="100" height="100" viewBox="0 0 168 168" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_304_265)">
+<path stroke="#9AA6B2" fill-rule="evenodd" clip-rule="evenodd" d="M7.57805 46.9883C68.0713 34.4739 114.729 75.8571 140.656 127.351C141.103 128.235 142.183 128.594 143.067 128.147C143.951 127.7 144.31 126.619 143.863 125.736C117.213 72.7981 69.0363 30.6078 6.84848 43.4738C5.87925 43.6723 5.25595 44.6224 5.45597 45.5959C5.65445 46.5651 6.60457 47.1883 7.57805 46.9883Z" fill="#9AA6B2"/>
+<path stroke="#9AA6B2" fill-rule="evenodd" clip-rule="evenodd" d="M141.774 125.577C139.153 123.821 135.888 121.581 135.511 121.337C125.27 114.742 114.555 110.088 102.789 106.839C101.835 106.574 100.844 107.137 100.579 108.092C100.314 109.047 100.877 110.037 101.832 110.302C113.242 113.449 123.635 117.96 133.568 124.359C134.147 124.731 141.483 129.771 143.043 130.679C143.681 131.054 144.158 131.068 144.271 131.061C144.873 131.044 145.256 130.785 145.51 130.528C145.794 130.237 146.146 129.641 146.11 128.748C146.069 127.813 145.509 125.904 145.407 125.411C143.884 117.967 141.535 109.791 140.902 101.8C140.298 94.1801 141.257 86.7195 146.292 80.3255C146.906 79.5477 146.769 78.4163 145.991 77.8026C145.213 77.1889 144.082 77.3257 143.468 78.1036C137.84 85.2533 136.647 93.5663 137.321 102.082C137.951 110.025 140.222 118.147 141.774 125.577Z" fill="#9AA6B2" />
+</g>
+<defs>
+<clipPath id="clip0_304_265">
+<rect width="130" height="130" fill="white" transform="translate(45.1514 167.311) rotate(-110)"/>
+</clipPath>
+</defs>
+</svg>
+          </Box>
+
+          <Box 
+          className="Step3"
+              data-speed="0.6"
+                    sx={{
+                      display:"flex",
+                      flexDirection:"column",
+            width:"50vh"
+
+                    }}
+          >
+                                              <Player
+                autoplay
+                loop
+                
+                src='goal.json'
+                style={{height: '350px', width: '350px' }}
+                />
+            <Typography variant="h6" sx={{ fontWeight: 600, color: '#1E3E62',fontSize:"2.5rem" }}>
+              Achieve Your Goals
             </Typography>
-            <Typography sx={{ color: '#555' }}>
+            <Typography sx={{ color: '#555',fontFamily:"Poppins",
+            fontWeight:"500",fontSize:"1.3rem"  }}>
               Use the tailored guidance to stay on track and reach your academic milestones.
             </Typography>
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
       </Box>
 
       {/* Testimonials Section */}

@@ -15,7 +15,7 @@ axios.defaults.baseURL = `${baseDomain}${apiVersion}`;
 axios.defaults.withCredentials = true;
 const theme = createTheme({
   typography: {
-    fontFamily: "Roboto Slab,serif",
+    fontFamily: "Hey Comic,Naturally,Roboto Slab,serif,Montserrat,Poppins",
     allVariants: { color: "white" },
   },
 });
