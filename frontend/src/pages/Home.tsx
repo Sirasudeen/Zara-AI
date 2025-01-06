@@ -252,7 +252,6 @@ gsap.fromTo('.Feature2  ',{
           start: "top bottom",
           end: "+=100",
           scrub: true,
-          markers: true
         }
       })
   
@@ -268,7 +267,6 @@ gsap.fromTo('.Feature2  ',{
           start: "top bottom",
           end: "+=100",
           scrub: true,
-          markers: true
 
         }
       })
