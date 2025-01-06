@@ -30,7 +30,7 @@ const Home = () => {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const pathRef = useRef<SVGPathElement | null>(null);
   const [pathLength, setPathLength] = useState(0);
-
+  const containerRef = useRef(null);
 
   useEffect(()=> {
     const lenis = new Lenis({
@@ -55,12 +55,82 @@ const Home = () => {
     }
   }, []);
   
+
+
+
+
+
+useGSAP(()=>{
+  gsap.to('path',{
+    strokeDashoffset: 0,
+    scrollTrigger: {
+       trigger: ".section-2",
+       scrub:true,
+        start: "top top+100",
+        end: 'bottom bottom',
+
+    }
+  })
+}, null);  
+
   useGSAP(()=>{
-    const tl = gsap.timeline();
+    gsap.set('.section-1',{
+      clipPath: 'ellipse(63% 60% at 38% 44%)'
+    })
 
-    if (isSmallScreen)
-    {
+    gsap.to('.section-1',{
+      clipPath: 'ellipse(40% 52% at 35% 47%)',
+      ease: "power1.inOut",
+      scrollTrigger: {
+        trigger: ".section-1",
+        start: 'center center',
+        scrub : true,
+        end: 'bottom center'
+      }
+    })
+  }, null)
 
+
+  useLayoutEffect(() => {
+    const context = gsap.context(() => {
+
+      const tl = gsap.timeline();
+
+      if (isSmallScreen)
+      {
+  
+        tl.to("#intro",{
+          text: "Hi, I'am Zara.",
+          duration: 2,
+          delay: 1
+        })
+        tl.to('.introSub',{
+          opacity: '100',
+          duration: 1,
+          ease: 'power1.inOut'
+        },">");
+        return;
+      }
+  
+      
+      gsap.set('body',{
+        overflow:'hidden',
+      })
+      gsap.set('.introBot',{
+        scale : 0
+  
+      })
+      gsap.set(".intro",{
+        x: "+=110%",
+        scale: 1.3,
+        ease: 'power1.out'
+      })
+      gsap.set(".introSub",{
+        opacity : '0',
+          })
+  
+    
+    
       tl.to("#intro",{
         text: "Hi, I'am Zara.",
         duration: 2,
@@ -71,57 +141,23 @@ const Home = () => {
         duration: 1,
         ease: 'power1.inOut'
       },">");
-      return;
-    }
-
-    
-    gsap.set('body',{
-      overflow:'hidden',
-    })
-    gsap.set('.introBot',{
-      scale : 0
-
-    })
-    gsap.set(".intro",{
-      x: "+=110%",
-      scale: 1.3,
-      ease: 'power1.out'
-    })
-    gsap.set(".introSub",{
-      opacity : '0',
-        })
-
   
-  
-    tl.to("#intro",{
-      text: "Hi, I'am Zara.",
-      duration: 2,
-      delay: 1
-    })
-    tl.to('.introSub',{
-      opacity: '100',
-      duration: 1,
-      ease: 'power1.inOut'
-    },">");
-
-    tl.to('.intro',{
-      x:"-=90%",
-      scale: 1,
-      ease : 'power4.inOut',
-      duration: 2,
-    },">")
-    .to('.introBot',{
-      scale: 1,
-      duration: 2,
-      ease: "power1.inOut"
-    },"<")
-
-  })
+      tl.to('.intro',{
+        x:"-=90%",
+        scale: 1,
+        ease : 'power4.inOut',
+        duration: 2,
+      },">")
+      .to('.introBot',{
+        scale: 1,
+        duration: 2,
+        ease: "power1.inOut"
+      },"<")
 
 
-  useGSAP(()=>{
 
-    gsap.set('.section2-subtitle',{
+
+      gsap.set('.section2-subtitle',{
         x:"+=100rem",
         opacity:"0"
     })
@@ -201,138 +237,81 @@ gsap.fromTo('.Feature2  ',{
           end: '+=400'
         }
       })
+      gsap.set(".section-3",{
+        clipPath: "ellipse(69% 72% at 37% 75%)"
+      })
+      gsap.fromTo('.How',{
+        opacity:'0',
+        transform:"translateY(100%)",
+        transition: "all 1s"
+      },{
+        opacity: "1",
+        transform:"translateY(0)",
+        scrollTrigger:{
+          trigger:".How",
+          start: "top bottom",
+          end: "+=100",
+          scrub: true,
+          markers: true
+        }
+      })
+  
+      gsap.fromTo('.Step1 .Step2 .Step3',{
+        opacity:'0',
+        transform:"translateY(100%)",
+        transition: "all 1s"
+      },{
+        opacity: "1",
+        transform:"translateY(0)",
+        scrollTrigger:{
+          trigger:".Step1",
+          start: "top bottom",
+          end: "+=100",
+          scrub: true,
+          markers: true
+
+        }
+      })
+     
+  
+      const tl2 = gsap.timeline({
+        scrollTrigger:{
+          trigger: ".section-3",
+          start: "center bottom",
+          end: "bottom top",
+          scrub: true
+        }
+      })
+  
+      tl2.to(".Step3",{
+        y: 200
+      },0)
+     
+      tl2.to(".Step2",{
+        y: 150
+      },0)
+      tl2.to(".Step1",{
+        y: 50
+      },0)
+
+
+      
+  
+
+    }, containerRef); 
 
 
 
-      ScrollTrigger.refresh();
-
-  },null)
-
-useGSAP(()=>{
-  gsap.to('path',{
-    strokeDashoffset: 0,
-    scrollTrigger: {
-       trigger: ".section-2",
-       scrub:true,
-        start: "top top+100",
-        end: 'bottom bottom',
-
-    }
-  })
-}, null);  
-
-  useGSAP(()=>{
-    gsap.set('.section-1',{
-      clipPath: 'ellipse(63% 60% at 38% 44%)'
-    })
-
-    gsap.to('.section-1',{
-      clipPath: 'ellipse(40% 52% at 35% 47%)',
-      ease: "power1.inOut",
-      scrollTrigger: {
-        trigger: ".section-1",
-        start: 'center center',
-        scrub : true,
-        end: 'bottom center'
-      }
-    })
-  }, null)
-
-  useLayoutEffect(()=> {
-    gsap.set(".section-3",{
-      clipPath: "ellipse(69% 72% at 37% 75%)"
-    })
-    gsap.fromTo('.How',{
-      opacity:'0',
-      transform:"translateY(100%)",
-      transition: "all 1s"
-    },{
-      opacity: "1",
-      transform:"translateY(0)",
-      scrollTrigger:{
-        trigger:".How",
-        start: "top bottom",
-        end: "+=100",
-        scrub: true
-      }
-    })
-
-    gsap.fromTo('.Step1',{
-      opacity:'0',
-      transform:"translateY(100%)",
-      transition: "all 1s"
-    },{
-      opacity: "1",
-      transform:"translateY(0)",
-      scrollTrigger:{
-        trigger:".Step1",
-        start: "top bottom",
-        end: "+=100",
-        scrub: true
-      }
-    })
-    gsap.fromTo('.Step2',{
-      opacity:'0',
-      transform:"translateY(100%)",
-      transition: "all 1s"
-    },{
-      opacity: "1",
-      transform:"translateY(0)",
-      scrollTrigger:{
-        trigger:".Step2",
-        start: "top bottom",
-        end: "+=100",
-        scrub: true
-      }
-
-    })   
-    gsap.fromTo('.Step3',{
-      opacity:'0',
-      transform:"translateY(100%)",
-      transition: "all 1s"
-    },{
-      opacity: "1",
-      transform:"translateY(0)",
-      scrollTrigger:{
-        trigger:".Step3",
-        start: "top bottom",
-        end: "+=100",
-        scrub: true
-      }
-
-    })
-
-    const tl = gsap.timeline({
-      scrollTrigger:{
-        trigger: ".section-3",
-        start: "center bottom",
-        end: "bottom top",
-        scrub: true
-      }
-    })
-
-    tl.to(".Step3",{
-      y: 200
-    },0)
-   
-    tl.to(".Step2",{
-      y: 150
-    },0)
-    tl.to(".Step1",{
-      y: 50
-    },0)
-
-    ScrollTrigger.refresh();
 
 
-  })
 
-
+    return () => context.revert(); 
+  }, []);
 
 
 
   return (
-    <Box width="100%" sx={{ backgroundColor: '#FFAD60',overflow: 'auto' }}>
+    <Box ref={containerRef} width="100%" sx={{ backgroundColor: '#FFAD60',overflow: 'auto' }}>
       {/* Hero Section */}
       <Box
       sx={{
