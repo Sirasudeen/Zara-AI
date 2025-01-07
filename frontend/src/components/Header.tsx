@@ -28,7 +28,7 @@ const Header = () => {
       }
       else if(currentScrollY < lastScrollY)
       {
-        setHeaderBG('grey');
+        setHeaderBG('#4C585B');
         setHeaderbgVis(true)
       }
 
