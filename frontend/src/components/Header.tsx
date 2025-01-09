@@ -8,6 +8,7 @@ import { Box, IconButton, Menu, MenuItem } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from "react-router-dom";
 import { useWindowScroll } from "react-use";
+import Magnet from '../blocks/Animations/Magnet/Magnet'
 
 
 const Header = () => {
@@ -108,8 +109,15 @@ const Header = () => {
               </>
             ) : (
               <>
+                <Magnet disabled={false} magnetStrength={50}>
+              
                 <NavigationLink bg="#FFF5CD" to="/login" text="Login" textColor="black" />
+                </Magnet>
+                <Magnet disabled={false} magnetStrength={50}>
+
                 <NavigationLink bg="#A66E38" to="/signup" text="Signup" textColor="white" />
+                </Magnet>
+
               </>
             )}
           </Box>

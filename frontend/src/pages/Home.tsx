@@ -17,7 +17,9 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 import Feature from '../components/Feature';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Lenis from '@studio-freight/lenis';
-import { transform } from 'framer-motion';
+import Magnet from '../blocks/Animations/Magnet/Magnet'
+import SplitText from "../blocks/TextAnimations/SplitText/SplitText";
+
 
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(TextPlugin);
@@ -29,6 +31,8 @@ const Home = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const isBigScreen = useMediaQuery(theme.breakpoints.down('md'));
+
   const pathRef = useRef<SVGPathElement | null>(null);
   const [pathLength, setPathLength] = useState(0);
   const containerRef = useRef(null);
@@ -122,7 +126,7 @@ useGSAP(()=>{
   
       })
       gsap.set(".intro",{
-        x: "+=110%",
+        x: "+=25vw",
         scale: 1.3,
         ease: 'power1.out'
       })
@@ -144,7 +148,7 @@ useGSAP(()=>{
       },">");
   
       tl.to('.intro',{
-        x:"-=90%",
+        x:"-=20vw",
         scale: 1,
         ease : 'power4.inOut',
         duration: 2,
@@ -334,18 +338,19 @@ gsap.fromTo('.Feature2  ',{
         >
           
         </Typography>
-        <Typography
+          <Typography
           className='introSub'
           sx={{
-            fontSize: 'clamp(1.4rem,1rem + 1.3vw,2rem)',
+            fontSize: 'clamp(1.4rem,1rem + 1.1vw,2rem)',
             color: '#3E5879',
-            maxWidth: '600px',
+            maxWidth: 'clamp(1rem,1rem + 45vw,35rem)',
             marginTop: '1rem',
           }}
         >
           Guiding you through academics and helping you stay stress-free, every
           step of the way.
         </Typography>
+        <Magnet disabled={false} magnetStrength={80}>
         <Button
         className= 'introSub'
           onClick={() => navigate('/signup')}
@@ -364,6 +369,8 @@ gsap.fromTo('.Feature2  ',{
         >
           Get Started
         </Button>
+        </Magnet>
+
         
 
         </Box>
@@ -371,7 +378,7 @@ gsap.fromTo('.Feature2  ',{
 
       </Box>
       </Box>
-      {   !isSmallScreen &&   <Box
+      {   isBigScreen &&   <Box
       className= 'introBot'
 
       sx={{
@@ -389,7 +396,7 @@ gsap.fromTo('.Feature2  ',{
             style={{ height: '800px', width: '800px' }}
           />
         </Box>}
-      {   !isSmallScreen &&   <Box
+      {   isBigScreen &&   <Box
       className= 'introBot'
       sx={{
         position: "absolute",
@@ -436,18 +443,30 @@ gsap.fromTo('.Feature2  ',{
 
         <Grid left={'10rem'} position={'absolute'} container spacing={4}>
           {/* Feature 1 */}
+
           <Grid left={'7rem'} top={'15.5rem'} position={'absolute'} item xs={12} md={4}>
+          <Magnet disabled={false} magnetStrength={20}>
+
               <Feature ClassName="Feature Feature1" Title='Academic Support' Description='Get personalized help with studies to keep you on track and achieve your goals.' />
+          </Magnet>
+              
           </Grid>
 
           {/* Feature 2 */}
           <Grid position={'absolute'} left="56rem" top={"50rem"}  item xs={12} md={4}>
+          <Magnet disabled={false} magnetStrength={20}>
+
           <Feature ClassName="Feature Feature2" Title='Motivational Guidance' Description='Stay stress-free with humor-filled and motivational responses tailored to your needs.' />
+          </Magnet>
           </Grid>
 
           {/* Feature 3 */}
           <Grid position={'absolute'} left="-3rem" top={"78rem"} item xs={12} md={4}>
+          <Magnet disabled={false} magnetStrength={20}>
+
           <Feature ClassName="Feature Feature3" Title='Stress Relief Tips' Description='Practical advice to handle stress effectively and maintain a balanced lifestyle.' />
+          </Magnet>
+         
           </Grid>
         </Grid>
       <Box
