@@ -681,20 +681,20 @@ stroke="#1E3E62" strokeWidth="3"/>
             display:"flex",
             flexDirection:"column",
             width:"50vh",
-
+           paddingLeft:"10vw"
           }}
           >
                       <Player
                 autoplay
                 loop
                 src='ask-question.json'
-                style={{ height: '350px', width: '350px' }}
+                style={{ height: 'clamp(100px,100px + 30vw,350px)', width: 'clamp(100px,100px + 30vw,350px)' }}
                 />
-            <Typography variant="h6" sx={{ml:"10vh", fontWeight: 600, color: '#1E3E62',fontSize:"2.5rem" }}>
+            <Typography variant="h6" sx={{ fontWeight: 600, color: '#1E3E62',fontSize:"clamp(1.5rem,1rem + 1vw,2.5rem)" }}>
               Ask a Question
             </Typography>
-            <Typography sx={{ ml:"10vh",color: '#555',width:"35vh",fontFamily:"Poppins",
-            fontWeight:"500",fontSize:"1.3rem" }}>
+            <Typography sx={{ color: '#555',width:"35vh",fontFamily:"Poppins",
+            fontWeight:"500",fontSize:"clamp(0.7rem,0.7rem + 2vw,1.3rem)" }}>
               Submit your queries to Zara-AI and let the chatbot work its magic.
             </Typography>
           </Box>
@@ -722,20 +722,20 @@ stroke="#1E3E62" strokeWidth="3"/>
             display:"flex",
             flexDirection:"column",
             width:"50vh",
-
+            paddingLeft:"50px",
           }}
           >
                                   <Player
                 autoplay
                 loop
                 src='Personalized-help.json'
-                style={{height: '350px', width: '350px' }}
+                style={{height: 'clamp(100px,100px + 30vw,350px)', width: 'clamp(100px,100px + 30vw,350px)' }}
                 />
-            <Typography  sx={{ mt:0,fontWeight: 600, color: '#1E3E62',fontSize:"2.5rem" }}>
+            <Typography  sx={{ mt:0,fontWeight: 600, color: '#1E3E62',fontSize:"clamp(1.5rem,1rem + 1vw,2.5rem)" }}>
               Get Personalized Help
             </Typography>
             <Typography sx={{ color: '#555',fontFamily:"Poppins",
-            fontWeight:"500",fontSize:"1.3rem"  }}>
+            fontWeight:"500",fontSize:"clamp(0.7rem,0.7rem + 2vw,1.3rem)"  }}>
               Zara-AI retrieves relevant information and crafts helpful responses.
             </Typography>
           </Box>
@@ -762,7 +762,8 @@ stroke="#1E3E62" strokeWidth="3"/>
                     sx={{
                       display:"flex",
                       flexDirection:"column",
-            width:"50vh"
+            width:"50vh",
+            paddingLeft:"50px",
 
                     }}
           >
@@ -771,13 +772,13 @@ stroke="#1E3E62" strokeWidth="3"/>
                 loop
                 
                 src='goal.json'
-                style={{height: '350px', width: '350px' }}
+                style={{height: 'clamp(100px,100px + 30vw,350px)', width: 'clamp(100px,100px + 30vw,350px)' }}
                 />
-            <Typography variant="h6" sx={{ fontWeight: 600, color: '#1E3E62',fontSize:"2.5rem" }}>
+            <Typography variant="h6" sx={{ fontWeight: 600, color: '#1E3E62',fontSize:"clamp(1.5rem,1rem + 1vw,2.5rem)" }}>
               Achieve Your Goals
             </Typography>
             <Typography sx={{ color: '#555',fontFamily:"Poppins",
-            fontWeight:"500",fontSize:"1.3rem"  }}>
+            fontWeight:"500",fontSize:"clamp(0.7rem,0.7rem + 2vw,1.3rem)"  }}>
               Use the tailored guidance to stay on track and reach your academic milestones.
             </Typography>
           </Box>
