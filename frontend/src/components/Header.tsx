@@ -9,7 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from "react-router-dom";
 import { useWindowScroll } from "react-use";
 import Magnet from '../blocks/Animations/Magnet/Magnet'
-
+import gsap from "gsap";
 
 const Header = () => {
 
@@ -17,24 +17,27 @@ const Header = () => {
   
   const [lastScrollY,setLastScrollY] = useState(0);
   const [HeaderbgVis,setHeaderbgVis] = useState(false);
-  const [HeaderBG,setHeaderBG] = useState('transparent');
   useEffect(() => {
       if(currentScrollY === 0){
           setHeaderbgVis(true);
-          setHeaderBG('transparent');
+
       }
       else if(currentScrollY > lastScrollY)
       {
          setHeaderbgVis(false);
       }
-      else if(currentScrollY < lastScrollY)
-      {
-        setHeaderBG('#4C585B');
-        setHeaderbgVis(true)
-      }
+
 
       setLastScrollY(currentScrollY);
   },[currentScrollY])
+
+  useEffect(() => {
+    gsap.to(".Headerbar", {
+      y: HeaderbgVis ? 0 : -100,
+      opacity: HeaderbgVis ? 1 : 0,
+      duration: 0.2,
+    });
+  }, [HeaderbgVis]);
 
   const auth = useAuth();
   const navigate = useNavigate();
@@ -54,7 +57,7 @@ const Header = () => {
 
   const handleNavigation = (path: string) => {
     navigate(path);
-    handleMenuClose(); // Close menu after navigation
+    handleMenuClose(); 
   };
 
   const navLinks = auth?.isLoggedIn
@@ -71,15 +74,15 @@ const Header = () => {
   return (
     <>
       <AppBar
+      className="Headerbar"
         sx={{
-          bgcolor: HeaderBG,
-          visibility: HeaderbgVis ? "visible": "hidden",
+          bgcolor: 'transparent',
           position: "fixed",
           top: 20,
           borderRadius: 14,
           height: 'fit-content',
           boxShadow: "none",
-          zIndex: 1200, // Ensure AppBar has proper z-index
+          zIndex: 1200, 
         }}
       >
         <Toolbar
