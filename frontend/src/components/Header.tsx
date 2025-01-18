@@ -76,12 +76,9 @@ const Header = () => {
           visibility: HeaderbgVis ? "visible": "hidden",
           position: "fixed",
           top: 20,
-          left: 30,
-          right: 30,
           borderRadius: 14,
           height: 'fit-content',
           boxShadow: "none",
-          padding: { xs: "0.5rem 1rem", md: "1rem 2rem" },
           zIndex: 1200, // Ensure AppBar has proper z-index
         }}
       >

@@ -107,11 +107,67 @@ useGSAP(()=>{
       })
       matchMedia.add(('(max-width:1280px)'),() => {
         gsap.set('.workBox',{
-          flexDirection:"column",alignItems:"center"
+          flexDirection:"column",alignItems:"center",
+          textAlign:"center"
         })
-        gsap.set(".section-3",{
-          height:"+=90rem"
+        gsap.set(".Step1",{
+          paddingLeft:"0%"
         })
+        gsap.fromTo(".Step1",{
+          x: "100%",
+          transform: "rotate(18deg)",
+          opacity:"0"
+        },{
+          
+            x: "0%", 
+            transform:"none",
+            opacity:"1",            
+            duration: 0.75,
+            ease: "cubic-bezier(0.33, 1, 0.68, 1)",
+          scrollTrigger:{
+            trigger:".Step1",
+            start: "top bottom",           
+            end: "bottom 70%",          
+            toggleActions: "play none none none"
+          }
+        })
+        gsap.fromTo(".Step2",{
+          x: "-100%",
+          transform: "rotate(342deg)",
+          opacity:"0"
+        },{
+          
+            x: "0%", 
+            transform:"none",
+            opacity:"1",            
+            duration: 0.75,
+            ease: "cubic-bezier(0.33, 1, 0.68, 1)",
+          scrollTrigger:{
+            trigger:".Step2",
+            start: "top bottom",           
+            end: "bottom 70%",          
+            toggleActions: "play none none none"
+          }
+        })
+        gsap.fromTo(".Step3",{
+          x: "100%",
+          transform: "rotate(18deg)",
+          opacity:"0"
+        },{
+          
+            x: "0%", 
+            transform:"none",
+            opacity:"1",            
+            duration: 0.75,
+            ease: "cubic-bezier(0.33, 1, 0.68, 1)",
+          scrollTrigger:{
+            trigger:".Step3",
+            start: "top bottom",           
+            end: "bottom 70%",          
+            toggleActions: "play none none none"
+          }
+        })
+
       })
 
 
@@ -387,27 +443,27 @@ gsap.fromTo('.Feature2  ',{
       })
   
 
-     
+        const tl2 = gsap.timeline({
+          scrollTrigger:{
+            trigger: ".section-3",
+            start: "center bottom",
+            end: "bottom top",
+            scrub: true
+          }
+        })
+    
+        tl2.to(".Step3",{
+          y: 200
+        },0)
+       
+        tl2.to(".Step2",{
+          y: 150
+        },0)
+        tl2.to(".Step1",{
+          y: 50
+        },0)
   
-      const tl2 = gsap.timeline({
-        scrollTrigger:{
-          trigger: ".section-3",
-          start: "center bottom",
-          end: "bottom top",
-          scrub: true
-        }
-      })
   
-      tl2.to(".Step3",{
-        y: 200
-      },0)
-     
-      tl2.to(".Step2",{
-        y: 150
-      },0)
-      tl2.to(".Step1",{
-        y: 50
-      },0)
 
 
       
@@ -438,7 +494,7 @@ gsap.fromTo('.Feature2  ',{
 
       sx={{
         display:'flex',
-        width: '100vw',
+        width: '100%',
         position: "absolute",
         gap: '30rem',
         minHeight: '100vh',
@@ -543,22 +599,23 @@ gsap.fromTo('.Feature2  ',{
 
       {/* Features Section */}
  <Box className="section-2"    sx={{ padding: { xs: '2rem', md: '4rem',minHeight: '200vh' }, backgroundColor: '#FFAD60' }}>
+ <Box 
+ sx={{display:"flex", overflow:"hidden",minWidth:"100vw"}}>
+       <Typography
+    className='section2-title'
+    sx={{ml:"2%",fontSize: "clamp(2rem,1rem + 15vw,15rem)",fontWeight: 700, color: '#1E3E62' , }}
+  >
+    FEATURES
+
+  </Typography>
+ </Box>
+
       <Box 
   display="flex" 
   alignItems="center" 
   gap="5rem"
   justifyContent="center" 
 >
- <Box 
- sx={{display:"flex", overflow:"hidden",minWidth:"100vw"}}>
-       <Typography
-    className='section2-title'
-    sx={{ml:10,fontSize: "clamp(2rem,1rem + 15vw,15rem)",fontWeight: 700, color: '#1E3E62' , }}
-  >
-    FEATURES
-
-  </Typography>
- </Box>
 
   {/* Right side: Zara-AI and Features */}
   <Box display="flex" flexDirection="column" alignItems="flex-start" gap="2rem" marginTop="2rem">
@@ -570,7 +627,7 @@ gsap.fromTo('.Feature2  ',{
         {isBigScreen ? (<Grid left={'10rem'} position={'absolute'} container spacing={4}>
           {/* Feature 1 */}
 
-          <Grid left={'7rem'} top={'15.5rem'} position={'absolute'} item xs={12} md={4}>
+          <Grid left={'7rem'} top={'14.5rem'} position={'absolute'} item xs={12} md={4}>
           <Magnet disabled={false} magnetStrength={20}>
 
               <Feature ClassName="Feature Feature1" Title='Academic Support' Description='Get personalized help with studies to keep you on track and achieve your goals.' />
@@ -579,7 +636,7 @@ gsap.fromTo('.Feature2  ',{
           </Grid>
 
           {/* Feature 2 */}
-          <Grid position={'absolute'} left="56rem" top={"50rem"}  item xs={12} md={4}>
+          <Grid position={'absolute'} left="56rem" top={"49rem"}  item xs={12} md={4}>
           <Magnet disabled={false} magnetStrength={20}>
 
           <Feature ClassName="Feature Feature2" Title='Motivational Guidance' Description='Stay stress-free with humor-filled and motivational responses tailored to your needs.' />
@@ -587,7 +644,7 @@ gsap.fromTo('.Feature2  ',{
           </Grid>
 
           {/* Feature 3 */}
-          <Grid position={'absolute'} left="-3rem" top={"78rem"} item xs={12} md={4}>
+          <Grid position={'absolute'} left="-3rem" top={"77rem"} item xs={12} md={4}>
           <Magnet disabled={false} magnetStrength={20}>
 
           <Feature ClassName="Feature Feature3" Title='Stress Relief Tips' Description='Practical advice to handle stress effectively and maintain a balanced lifestyle.' />
@@ -648,7 +705,6 @@ stroke="#1E3E62" strokeWidth="3"/>
         sx={{
           display:"flex",
           flexDirection:"column",
-          height:"150vh",
           backgroundColor: '#FFFAF4',
           textAlign: 'center',
         }}
@@ -669,7 +725,6 @@ stroke="#1E3E62" strokeWidth="3"/>
         className="workBox"
         sx={{
           display:"flex",
-          
           gap:"4rem",
           mt:"4rem",
           textAlign:"left",
@@ -680,8 +735,7 @@ stroke="#1E3E62" strokeWidth="3"/>
           sx={{
             display:"flex",
             flexDirection:"column",
-            width:"50vh",
-           paddingLeft:"10vw"
+            paddingLeft:"5%"
           }}
           >
                       <Player
@@ -690,10 +744,10 @@ stroke="#1E3E62" strokeWidth="3"/>
                 src='ask-question.json'
                 style={{ height: 'clamp(100px,100px + 30vw,350px)', width: 'clamp(100px,100px + 30vw,350px)' }}
                 />
-            <Typography variant="h6" sx={{ fontWeight: 600, color: '#1E3E62',fontSize:"clamp(1.5rem,1rem + 1vw,2.5rem)" }}>
+            <Typography variant="h6" sx={{padding:"2%",fontWeight: 600, color: '#1E3E62',fontSize:"clamp(1.5rem,1rem + 1vw,2.5rem)" }}>
               Ask a Question
             </Typography>
-            <Typography sx={{ color: '#555',width:"35vh",fontFamily:"Poppins",
+            <Typography sx={{ padding:"2%",color: '#555',fontFamily:"Poppins",
             fontWeight:"500",fontSize:"clamp(0.7rem,0.7rem + 2vw,1.3rem)" }}>
               Submit your queries to Zara-AI and let the chatbot work its magic.
             </Typography>
@@ -721,8 +775,6 @@ stroke="#1E3E62" strokeWidth="3"/>
           sx={{
             display:"flex",
             flexDirection:"column",
-            width:"50vh",
-            paddingLeft:"50px",
           }}
           >
                                   <Player
@@ -731,10 +783,10 @@ stroke="#1E3E62" strokeWidth="3"/>
                 src='Personalized-help.json'
                 style={{height: 'clamp(100px,100px + 30vw,350px)', width: 'clamp(100px,100px + 30vw,350px)' }}
                 />
-            <Typography  sx={{ mt:0,fontWeight: 600, color: '#1E3E62',fontSize:"clamp(1.5rem,1rem + 1vw,2.5rem)" }}>
+            <Typography  sx={{padding:"2%", mt:0,fontWeight: 600, color: '#1E3E62',fontSize:"clamp(1.5rem,1rem + 1vw,2.5rem)" }}>
               Get Personalized Help
             </Typography>
-            <Typography sx={{ color: '#555',fontFamily:"Poppins",
+            <Typography sx={{ padding:"2%",color: '#555',width:"100%",fontFamily:"Poppins",
             fontWeight:"500",fontSize:"clamp(0.7rem,0.7rem + 2vw,1.3rem)"  }}>
               Zara-AI retrieves relevant information and crafts helpful responses.
             </Typography>
@@ -762,9 +814,7 @@ stroke="#1E3E62" strokeWidth="3"/>
                     sx={{
                       display:"flex",
                       flexDirection:"column",
-            width:"50vh",
-            paddingLeft:"50px",
-
+            paddingBottom: "20rem"
                     }}
           >
                                               <Player
@@ -774,10 +824,10 @@ stroke="#1E3E62" strokeWidth="3"/>
                 src='goal.json'
                 style={{height: 'clamp(100px,100px + 30vw,350px)', width: 'clamp(100px,100px + 30vw,350px)' }}
                 />
-            <Typography variant="h6" sx={{ fontWeight: 600, color: '#1E3E62',fontSize:"clamp(1.5rem,1rem + 1vw,2.5rem)" }}>
+            <Typography variant="h6" sx={{ padding:"2%",fontWeight: 600, color: '#1E3E62',fontSize:"clamp(1.5rem,1rem + 1vw,2.5rem)" }}>
               Achieve Your Goals
             </Typography>
-            <Typography sx={{ color: '#555',fontFamily:"Poppins",
+            <Typography sx={{ padding:"2%",color: '#555',fontFamily:"Poppins",
             fontWeight:"500",fontSize:"clamp(0.7rem,0.7rem + 2vw,1.3rem)"  }}>
               Use the tailored guidance to stay on track and reach your academic milestones.
             </Typography>
