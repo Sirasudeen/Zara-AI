@@ -6,14 +6,14 @@ import Signup from "./pages/Signup";
 import Chat from "./pages/Chat";
 import NotFound from "./pages/NotFound";
 import { useAuth } from "./context/AuthContext";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
   const auth = useAuth();
-
   return (
     <main>
       <Header />
-      <Routes>
+      <Routes >
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
@@ -22,6 +22,7 @@ function App() {
         )}
         <Route path="*" element={<NotFound />} />
       </Routes>
+
     </main>
   );
 }

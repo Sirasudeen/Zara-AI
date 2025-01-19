@@ -8,6 +8,7 @@ import { toast } from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import './SpaceAnimation.css';
+import transition from "../components/transition/transition.js";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -115,5 +116,6 @@ const Login = () => {
       </Box>
   );
 };
+const TLOGIN = transition(Login)
 
-export default Login;
+export default TLOGIN;
