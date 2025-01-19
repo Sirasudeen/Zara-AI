@@ -187,32 +187,16 @@ useGSAP(()=>{
           opacity:"1",           
           duration: 0.75,
           ease: "cubic-bezier(0.33, 1, 0.68, 1)",
+          stagger:{
+            each:"0.1"
+          }
         },">");
         gsap.set(".intro",{
           x:"+=20vw",
           scale: 1.3,
           ease: 'power1.out'
         })
-        gsap.set(".introSub",{
-          opacity : '0',
-            })
-            tl.to("#intro",{
-              text: "Hi, I'am Zara.",
-              duration: 2,
-              delay: 1
-            })
-            tl.to('.introSub',{
-              opacity: '100',
-              duration: 1,
-              ease: 'power1.inOut'
-            },">");
-        
-            tl.to('.intro',{
-              scale: 1,
-              ease : 'power4.inOut',
-              duration: 2,
-            },">")
-
+       
             
     gsap.fromTo('.section2-title',{
       y: "100%"
@@ -240,7 +224,7 @@ useGSAP(()=>{
   transform: ' scale(1.4) rotate(344deg)',
   borderRadius: '10px',
   border: "2px solid #1E3E62",
-  ease: "power1.in",
+  ease: "power2.out",
   scrollTrigger: {
     trigger: ".Feature1",
     start: 'top bottom',
@@ -259,7 +243,7 @@ gsap.fromTo('.Feature2  ',{
       transform: ' scale(1.4) rotate(9deg)',
       borderRadius: '10px',
       border: "2px solid #1E3E62",
-      ease: "power1.in",
+      ease: "power2.out",
       scrollTrigger: {
         trigger: ".Feature2",
         start: 'top bottom',
@@ -277,7 +261,7 @@ gsap.fromTo('.Feature2  ',{
         transform: ' scale(1.4) rotate(-6deg)',
         borderRadius: '10px',
         border: "2px solid #1E3E62",
-        ease: "power1.in",
+        ease: "power2.out",
         scrollTrigger: {
           trigger: ".Feature3",
           start: 'top bottom',
@@ -303,6 +287,9 @@ gsap.fromTo('.Feature2  ',{
           opacity:"1",           
           duration: 0.75,
           ease: "cubic-bezier(0.33, 1, 0.68, 1)",
+          stagger:{
+            each:"0.5"
+          }
         },">");
 
         gsap.set('.introBot',{
@@ -314,19 +301,7 @@ gsap.fromTo('.Feature2  ',{
           scale: 1.3,
           ease: 'power1.out'
         })
-        gsap.set(".introSub",{
-          opacity : '0',
-            })
-            tl.to("#intro",{
-              text: "Hi, I'am Zara.",
-              duration: 2,
-              delay: 1
-            })
-            tl.to('.introSub',{
-              opacity: '100',
-              duration: 1,
-              ease: 'power1.inOut'
-            },">");
+
         
             tl.to('.intro',{
               x:"-=20vw",
@@ -370,7 +345,7 @@ gsap.fromTo('.Feature2  ',{
 
     gsap.fromTo('.Feature1  ',{
       opacity: '0',
-      scale: '0.6'
+      scale: '0.6',
 },{
   opacity: '100',
   transform: ' scale(1.3) rotate(344deg)',
@@ -525,7 +500,7 @@ gsap.fromTo('.Feature2  ',{
           sx={{
             fontSize: 'clamp(1.4rem,1rem + 1.1vw,2rem)',
             color: '#3E5879',
-            maxWidth: 'clamp(1rem,1rem + 45vw,35rem)',
+            maxWidth: 'clamp(1.5rem,1.5rem + 45vw,35rem)',
             marginTop: '1rem',
           }}
         >
@@ -868,23 +843,23 @@ stroke="#1E3E62" strokeWidth="3"/>
           }}
         >
           <Typography sx={{
-            fontSize:"3rem",
+            fontSize:"clamp(0.3rem,1rem + 3vw,3rem)",
             color:"#1E3E62"
           }}>
             Quick Links
           </Typography>
           <Link  href="/" underline="hover" color="inherit" sx={{
-            fontFamily:"Poppins",fontSize:"1.5rem",fontWeight:"500"
+            fontFamily:"Poppins",fontSize:"clamp(0.5rem,0.5rem + 2vw,1.5rem)",fontWeight:"500"
           }}>
             Home
           </Link>
           <Link href="/about" underline="hover" color="inherit"sx={{
-            fontFamily:"Poppins",fontSize:"1.5rem",fontWeight:"500"
+            fontFamily:"Poppins",fontSize:"clamp(0.5rem,0.5rem + 2vw,1.5rem)",fontWeight:"500"
           }}>
             About
           </Link>
           <Link href="/contact" underline="hover" color="inherit"sx={{
-            fontFamily:"Poppins",fontSize:"1.5rem",fontWeight:"500"
+            fontFamily:"Poppins",fontSize:"clamp(0.5rem,0.5rem + 2vw,1.5rem)",fontWeight:"500"
           }}>
             Contact
           </Link>
@@ -892,14 +867,14 @@ stroke="#1E3E62" strokeWidth="3"/>
         </Box>
                 <Box sx={{ maxWidth:"30rem"}}>
           <Typography sx={{
-            fontSize:"3rem",
+            fontSize:"clamp(0.3rem,1rem + 3vw,3rem)",
             color:"#1E3E62",
             mb:"2rem"
           }}>
             About Us
           </Typography>
           <Typography sx={{
-            fontFamily:"Poppins",fontSize:"1.5rem",fontWeight:"500", color: "#333"
+            fontFamily:"Poppins",fontSize:"clamp(0.5rem,0.5rem + 2vw,1.5rem)",fontWeight:"500", color: "#333"
           }}>
             We are a team dedicated to creating seamless user experiences. Stay
             tuned for exciting updates!
@@ -916,7 +891,7 @@ stroke="#1E3E62" strokeWidth="3"/>
           }}
         >
           <Typography sx={{
-            fontSize:"3rem",
+            fontSize:"clamp(0.3rem,1rem + 3vw,3rem)",
             color:"#1E3E62",
             mb:"2rem"
           }}>
@@ -956,7 +931,7 @@ stroke="#1E3E62" strokeWidth="3"/>
       </Box>
 
         <Box sx={{ textAlign: "center", mt: 4 }}>
-        <Typography variant="body2">
+        <Typography variant="body2" sx={{fontSize:"clamp(0.5rem,0.5rem + 2vw,1.5rem)"}}>
           &copy; {new Date().getFullYear()} Zara AI. All rights
           reserved.
         </Typography>

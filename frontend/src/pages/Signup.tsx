@@ -36,36 +36,30 @@ const Signup = () => {
   return (
     <Box
       className="container"
-      width={"100%"}
-      height={"100vh"}
-      display={"flex"}
-      flexDirection={"row"}
-      justifyContent={"center"}
-      alignItems={"center"}
-      padding={2}
-      position="relative"
-      overflow="hidden"
+
+      sx={{
+        background: 'url("bg.jpg")',
+        width:"100%",
+        padding:0,
+        margin:0,
+        minheight:"100vh",
+        display: "flex",
+        flexDirection:"row",
+        justifyContent:"center",
+        alignItems:"center",
+      }}
     >
       <img src="/earth.png" alt="Earth" width={100} className="planet earth" />
       <img src="/saturn.png" alt="Saturn" width={100} className="planet saturn" />
       <img src="/comet.svg" alt="Comet" width={100} className="comet" />
 
-      <Box
-        sx={{
-          width: "600px",
-          position:"absolute",
-          right: "7rem",
-          animation: "sway 2s infinite alternate",
-        }}
-        display={{ md: "flex", sm: "none", xs: "none" }}
-      >
-        <img src="astronaut.svg" alt="Robot" className="astronaut" />
-      </Box>
 
       <form
         onSubmit={handleSubmit}
         style={{
           animation: 'sway 2s infinite alternate',
+          margin:"4% 0 0 0"
+
         }}
         className="form sway"
       >
@@ -75,6 +69,7 @@ const Signup = () => {
             textAlign="center"
             fontWeight={600}
             sx={{
+              fontSize:"clamp(0.8rem,0.8rem + 10vw,2.5rem)",
               color: "#B17457"
             }}
           >
