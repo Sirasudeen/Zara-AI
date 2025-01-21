@@ -6,12 +6,13 @@ import Signup from "./pages/Signup";
 import Chat from "./pages/Chat";
 import NotFound from "./pages/NotFound";
 import { useAuth } from "./context/AuthContext";
-import { AnimatePresence } from "framer-motion";
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
   const auth = useAuth();
   return (
     <main>
+      <Analytics />
       <Header />
       <Routes >
         <Route path="/" element={<Home />} />
