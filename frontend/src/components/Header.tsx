@@ -13,23 +13,22 @@ import gsap from "gsap";
 
 const Header = () => {
 
-  const {y:currentScrollY} = useWindowScroll();
-  
-  const [lastScrollY,setLastScrollY] = useState(0);
-  const [HeaderbgVis,setHeaderbgVis] = useState(false);
+  const { y: currentScrollY } = useWindowScroll();
+
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [HeaderbgVis, setHeaderbgVis] = useState(false);
   useEffect(() => {
-      if(currentScrollY === 0){
-          setHeaderbgVis(true);
+    if (currentScrollY === 0) {
+      setHeaderbgVis(true);
 
-      }
-      else if(currentScrollY > lastScrollY)
-      {
-         setHeaderbgVis(false);
-      }
+    }
+    else if (currentScrollY > lastScrollY) {
+      setHeaderbgVis(false);
+    }
 
 
-      setLastScrollY(currentScrollY);
-  },[currentScrollY])
+    setLastScrollY(currentScrollY);
+  }, [currentScrollY])
 
   useEffect(() => {
     gsap.to(".Headerbar", {
@@ -57,15 +56,15 @@ const Header = () => {
 
   const handleNavigation = (path: string) => {
     navigate(path);
-    handleMenuClose(); 
+    handleMenuClose();
   };
 
   const navLinks = auth?.isLoggedIn
-  ? [
+    ? [
       <MenuItem key="chat" onClick={() => handleNavigation('/chat')}>Go To Chat</MenuItem>,
       <MenuItem key="logout" onClick={() => { auth.logout(); handleNavigation('/'); }}>Logout</MenuItem>,
     ]
-  : [
+    : [
       <MenuItem key="login" onClick={() => handleNavigation('/login')}>Login</MenuItem>,
       <MenuItem key="signup" onClick={() => handleNavigation('/signup')}>Signup</MenuItem>,
     ];
@@ -74,7 +73,7 @@ const Header = () => {
   return (
     <>
       <AppBar
-      className="Headerbar"
+        className="Headerbar"
         sx={{
           bgcolor: 'transparent',
           position: "fixed",
@@ -82,7 +81,7 @@ const Header = () => {
           borderRadius: 14,
           height: 'fit-content',
           boxShadow: "none",
-          zIndex: 1200, 
+          zIndex: 1200,
         }}
       >
         <Toolbar
@@ -110,24 +109,23 @@ const Header = () => {
             ) : (
               <>
                 <Magnet disabled={false} magnetStrength={50}>
-              
-                <NavigationLink bg="#FFF5CD" to="/login" text="Login" textColor="black" />
+
+                  <NavigationLink bg="#FFF5CD" to="/login" text="Login" textColor="black" />
                 </Magnet>
                 <Magnet disabled={false} magnetStrength={50}>
 
-                <NavigationLink bg="#A66E38" to="/signup" text="Signup" textColor="white" />
+                  <NavigationLink bg="#A66E38" to="/signup" text="Signup" textColor="white" />
                 </Magnet>
 
               </>
             )}
           </Box>
 
-          {/* Menu Icon for small screens */}
           <IconButton
             edge="end"
             color="inherit"
             aria-label="menu"
-            sx={{ display: { xs: "block", md: "none"}, mt:"1rem" }}
+            sx={{ display: { xs: "block", md: "none" }, mt: "1rem" }}
             onClick={handleMenuOpen}
           >
             <MenuIcon />
@@ -135,17 +133,16 @@ const Header = () => {
         </Toolbar>
       </AppBar>
 
-      {/* Dropdown Menu for small screens */}
       <Menu
         anchorEl={anchorEl}
         open={isMenuOpen}
         onClose={handleMenuClose}
         PaperProps={{
           style: {
-            background: "orange", // Background color of the dropdown
-            width: '100px', // Adjust width of dropdown menu
+            background: "orange",
+            width: '100px',
           },
-          
+
         }}
 
       >

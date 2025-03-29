@@ -7,6 +7,7 @@
   font-family: "Hey Comic";
   src: url("/fonts/Hey_Comic.ttf") format('truetype');
 }
+
 @font-face {
   font-family: "Naturally";
   src: url("/fonts/Naturaly.otf") format('opentype');
@@ -19,12 +20,14 @@ body {
   overflow-y: auto;
   background: #B7E0FF;
   color: #E78F81;
+  font-size: 16px;
   font-family: "Roboto Slab", serif;
 }
 
 .image-inverted {
   filter: invert(100%);
 }
+
 .nav-link {
   font-weight: 600;
   text-transform: uppercase;
@@ -45,6 +48,7 @@ body {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(359deg);
   }

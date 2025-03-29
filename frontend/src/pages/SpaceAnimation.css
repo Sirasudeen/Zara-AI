@@ -42,18 +42,23 @@ body {
   0% {
     transform: translate(100vw, -30rem);
   }
+
   20% {
     transform: translate(-30rem, 10rem);
   }
+
   40% {
     transform: translate(-50rem, 20rem);
   }
+
   60% {
     transform: translate(-20rem, 40rem);
   }
+
   80% {
     transform: translate(10rem, 60rem);
   }
+
   100% {
     transform: translate(100vw, 100rem);
   }
@@ -63,18 +68,23 @@ body {
   0% {
     transform: translate(0, 0);
   }
+
   20% {
     transform: translate(-60rem, 20rem);
   }
+
   40% {
     transform: translate(40rem, 30rem);
   }
+
   60% {
     transform: translate(-30rem, -25rem);
   }
+
   80% {
     transform: translate(50rem, 10rem);
   }
+
   100% {
     transform: translate(0, 0);
   }
@@ -82,18 +92,20 @@ body {
 
 @keyframes floatComet {
   0% {
-    transform: translate(100vw,-50rem);
+    transform: translate(100vw, -50rem);
   }
+
   50% {
-    transform: translate(0,0);
+    transform: translate(0, 0);
   }
+
   100% {
-    transform: translate(-100vh,30rem);
+    transform: translate(-100vh, 30rem);
   }
 }
 
 .container {
-  position: relative;
+
   width: 100%;
   height: 100vh;
   display: flex;
@@ -117,7 +129,6 @@ body {
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   position: absolute;
-  top: 10rem;
   width: 400px;
 }
 
