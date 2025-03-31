@@ -86,40 +86,6 @@ const Home = () => {
       gsap.set('body', {
         overflow: 'hidden',
       })
-      matchMedia.add(('(max-width:870px)'), () => {
-        gsap.to(".section-1", {
-          minHeight: "60vh",
-          ease: "power1.out",
-          scrollTrigger: {
-            trigger: ".section-1",
-            start: 'bottom bottom',
-            scrub: true,
-            end: 'bottom center'
-          }
-        })
-        gsap.to(".intro", {
-          scale: "0.8",
-          ease: "cubic-bezier(0.4, 0, 0.2, 1)",
-          scrollTrigger: {
-            trigger: ".section-1",
-            start: 'bottom bottom',
-            scrub: true,
-            end: 'bottom center'
-          }
-        })
-
-        gsap.to(".section-2", {
-          y: "-=40vh",
-          ease: "cubic-bezier(0.4, 0, 0.2, 1)",
-
-          scrollTrigger: {
-            trigger: ".section-1",
-            start: 'bottom bottom',
-            scrub: true,
-            end: 'bottom center'
-          }
-        })
-      })
       matchMedia.add(('(min-width:870px)'), () => {
         gsap.set('.section-1', {
           clipPath: 'ellipse(63% 60% at 38% 44%)'
@@ -135,7 +101,6 @@ const Home = () => {
             end: 'bottom center'
           }
         })
-
 
       })
       matchMedia.add(('(min-width:1600px)'), () => {
@@ -206,19 +171,6 @@ const Home = () => {
             toggleActions: "play none none none"
           }
         })
-        gsap.to(".section-2", {
-          height: "180vh",
-          ease: "cubic-bezier(0.4, 0, 0.2, 1)",
-
-
-          scrollTrigger: {
-            trigger: ".section-2",
-            start: 'bottom bottom',
-            scrub: true,
-            end: 'bottom top'
-          }
-        })
-
 
       })
 
@@ -623,7 +575,7 @@ const Home = () => {
         />
       </Box>}
 
-      <Box className="section-2" sx={{ mt: 0, padding: { xs: '2rem', md: '4rem', minHeight: '200vh' }, backgroundColor: '#FFAD60' }}>
+      <Box className="section-2" sx={{ padding: { xs: '2rem', md: '4rem', minHeight: '200vh' }, backgroundColor: '#FFAD60' }}>
         <Box
           sx={{ display: "flex", overflow: "hidden", minWidth: "100vw" }}>
           <Typography
