@@ -163,7 +163,7 @@ const Home = () => {
             opacity: 1,
             scale: 1,
             ease: 'back.out(1.7)',
-            stagger: 0.5,
+            stagger: 0.05,
             duration: 0.2,
           }
         );
@@ -257,13 +257,11 @@ const Home = () => {
       matchMedia.add(('(min-width:1800px)'), () => {
 
         gsap.set(".word", {
-          // y: "100%",
           opacity: "0",
           scale: 0
 
         })
         gsap.set(".introButton", {
-          // y: "100%",
           opacity: "0",
           scale: 0
 
