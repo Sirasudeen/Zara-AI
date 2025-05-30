@@ -138,7 +138,7 @@ export const deleteUserChats = async () => {
  */
 export const logoutUser = async () => {
   try {
-    const { data } = await axios.post("/user/logout"); 
+    const { data } = await axios.post("/user/logout");
     return data;
   } catch (error: unknown) {
     throw new Error("Unable to log out");

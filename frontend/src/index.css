@@ -53,3 +53,8 @@ body {
     transform: rotate(359deg);
   }
 }
+
+.word {
+  display: inline-block;
+  transform-origin: center center;
+}
